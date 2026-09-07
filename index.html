@@ -2,158 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Proyecto Placa</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      padding: 50px 20px;
-      overflow-x: hidden;
-      background: linear-gradient(-45deg, #a1c4fd, #c2e9fb, #fbc2eb, #a6c1ee);
-      background-size: 400% 400%;
-      animation: fondoAnimado 12s ease infinite;
-    }
-
-    @keyframes fondoAnimado {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    h1 {
-      font-size: 3.2rem;
-      color: #2c3e50;
-      text-align: center;
-      margin-bottom: 5px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.15);
-      animation: aparecerArriba 0.8s ease-out;
-    }
-
-    h2 {
-      font-size: 1.7rem;
-      color: #2c3e50;
-      text-align: center;
-      margin-top: 55px;
-      margin-bottom: 35px;
-      font-weight: 600;
-      position: relative;
-      animation: aparecerArriba 0.8s ease-out 0.2s both;
-    }
-
-    h2::after {
-      content: '';
-      display: block;
-      width: 60px;
-      height: 4px;
-      background: #2c3e50;
-      border-radius: 4px;
-      margin: 10px auto 0;
-      animation: crecerLinea 0.6s ease-out 0.6s both;
-    }
-
-    @keyframes aparecerArriba {
-      from { opacity: 0; transform: translateY(-25px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes crecerLinea {
-      from { width: 0; }
-      to   { width: 60px; }
-    }
-
-    .integrantes {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      max-width: 900px;
-    }
-
-    .tarjeta {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 22px;
-      width: 180px;
-      text-align: center;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-      opacity: 0;
-      transform: translateY(30px) scale(0.9);
-      animation: entrarTarjeta 0.6s ease-out forwards;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-
-    .tarjeta:nth-child(1) { animation-delay: 0.3s; }
-    .tarjeta:nth-child(2) { animation-delay: 0.5s; }
-    .tarjeta:nth-child(3) { animation-delay: 0.7s; }
-    .tarjeta:nth-child(4) { animation-delay: 0.9s; }
-    .tarjeta:nth-child(5) { animation-delay: 1.1s; }
-    .tarjeta:nth-child(6) { animation-delay: 1.3s; }
-
-    @keyframes entrarTarjeta {
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .tarjeta:hover {
-      transform: translateY(-10px) scale(1.05) rotate(-1deg);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.2);
-    }
-
-    .tarjeta img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #2c3e50;
-      margin-bottom: 14px;
-      transition: transform 0.35s ease, border-color 0.35s ease;
-    }
-
-    .tarjeta:hover img {
-      transform: scale(1.1) rotate(4deg);
-      border-color: #8e44ad;
-    }
-
-    .tarjeta p {
-      margin: 0;
-      font-weight: 600;
-      color: #2c3e50;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-
-    .tarjeta:hover p {
-      color: #8e44ad;
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <h1>proyecto placa</h1>
-
-  <h2>Integrantes</h2>
-  <div class="integrantes">
-    <div class="tarjeta">
-      <img src="foto1.jpg" alt="Alejandro Ruiz Corona">
-      <p>Nombre Integrante 1</p>
-    </div>
-    <div class="tarjeta">
-      <img src="Fotos_Integrantes/Cano.jpeg" alt="Jorge Fernando Cano Garcia">
-      <p>Nombre Integrante 2</p>
-    </div>
-  </div>
-</body><!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
   <title>proyecto placa</title>
   <style>
     * {
@@ -231,12 +79,12 @@
     }
 
     .tarjeta {
-      background: #ffffff;
+      position: relative;
       border-radius: 18px;
-      padding: 22px;
-      width: 180px;
-      text-align: center;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      width: 200px;
+      height: 260px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.18);
       opacity: 0;
       transform: translateY(30px) scale(0.9);
       animation: entrarTarjeta 0.6s ease-out forwards;
@@ -255,35 +103,43 @@
     }
 
     .tarjeta:hover {
-      transform: translateY(-10px) scale(1.05) rotate(-1deg);
-      box-shadow: 0 14px 28px rgba(0,0,0,0.2);
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.28);
     }
 
     .tarjeta img {
-      width: 120px;
-      height: 120px;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #2c3e50;
-      margin-bottom: 14px;
-      transition: transform 0.35s ease, border-color 0.35s ease;
+      transition: transform 0.5s ease;
     }
 
     .tarjeta:hover img {
-      transform: scale(1.1) rotate(4deg);
-      border-color: #8e44ad;
+      transform: scale(1.1);
+    }
+
+    .tarjeta .overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 30px 14px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
     }
 
     .tarjeta p {
       margin: 0;
       font-weight: 600;
-      color: #2c3e50;
+      color: #ffffff;
       font-size: 1rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
       transition: color 0.3s ease;
     }
 
     .tarjeta:hover p {
-      color: #8e44ad;
+      color: #f1c8ff;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -294,12 +150,13 @@
   <h2>Integrantes</h2>
   <div class="integrantes">
     <div class="tarjeta">
-      <img src="foto1.jpg" alt="Nombre Integrante 1">
-      <p>Nombre Integrante 1</p>
+      <img src="foto1.jpg" alt="Alejandro Ruiz Corona">
+      <div class="overlay"><p>Alejandro Ruiz Corona</p></div>
     </div>
     <div class="tarjeta">
-      <img src="foto2.jpg" alt="Nombre Integrante 2">
-      <p>Nombre Integrante 2</p>
+      <img src="Fotos_Integrantes/Cano.jpeg" alt="Jorge Fernando Cano Garcia">
+      <div class="overlay"><p>Jorge Fernando Cano Garcia</p></div>
     </div>
   </div>
 </body>
+</html>
