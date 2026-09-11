@@ -91,8 +91,8 @@
     .tarjeta {
       position: relative;
       border-radius: 18px;
-      width: 200px;
-      height: 260px;
+      width: 210px;
+      height: 300px;
       overflow: hidden;
       box-shadow: 0 6px 16px rgba(0,0,0,0.18);
       opacity: 0;
@@ -132,11 +132,11 @@
       left: 0;
       right: 0;
       bottom: 0;
-      padding: 30px 14px 16px;
-      background: linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0));
+      padding: 28px 14px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.55) 65%, rgba(0,0,0,0));
     }
 
-    .tarjeta p {
+    .tarjeta .overlay .nombre {
       margin: 0;
       font-weight: 600;
       color: #ffffff;
@@ -145,8 +145,16 @@
       transition: color 0.3s ease;
     }
 
-    .tarjeta:hover p {
+    .tarjeta:hover .nombre {
       color: #f1c8ff;
+    }
+
+    .tarjeta .overlay .dato {
+      margin: 4px 0 0;
+      font-weight: 400;
+      color: #eaeaea;
+      font-size: 0.78rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
 
     .doc-tarjeta {
@@ -209,11 +217,19 @@
   <div id="integrantes" class="seccion activa">
     <div class="tarjeta">
       <img src="Fotos_Integrantes/Alex.jpeg" alt="Alejandro Ruiz Corona">
-      <div class="overlay"><p>Alejandro Ruiz Corona</p></div>
+      <div class="overlay">
+        <p class="nombre">Alejandro Ruiz Corona</p>
+        <p class="dato">Matrícula: 203982</p>
+        <p class="dato">203982@iberopuebla.mx</p>
+      </div>
     </div>
     <div class="tarjeta">
       <img src="Fotos_Integrantes/Cano.jpeg" alt="Jorge Fernando Cano Garcia">
-      <div class="overlay"><p>Jorge Fernando Cano Garcia</p></div>
+      <div class="overlay">
+        <p class="nombre">Jorge Fernando Cano Garcia</p>
+        <p class="dato">Matrícula: 200763</p>
+        <p class="dato">200763@iberopuebla.mx</p>
+      </div>
     </div>
   </div>
 
