@@ -263,6 +263,38 @@
       background: #8e44ad;
       transform: scale(1.05);
     }
+
+    .btn-inicio {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #2c3e50;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(15px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+      z-index: 100;
+    }
+
+    .btn-inicio.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .btn-inicio:hover {
+      background: #8e44ad;
+      transform: translateY(-4px);
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 </head>
@@ -301,14 +333,14 @@
       <h3 style="margin-top:35px;">Objetivos Específicos</h3>
       <div class="objetivos-especificos">
         <div class="objetivo-item">
-          <h4>Primer Objetivo</h4>
-          <p>Aprender a usar el editor de esqumeas para la fabricacion de placas.</p>
+          <h4>Objetivo 1</h4>
+          <p>Describe aquí el objetivo.</p>
           <img src="Fotos_Objetivos_Especificos/Esquematico.png" alt="Objetivo 1">
         </div>
         <div class="objetivo-item">
-          <h4>Segundo Objetivo</h4>
-          <p>Aprender a usar el editor de placas para evitar daños innecesarios</p>
-          <img src="Fotos_Objetivos_Especificos/Placa.png" alt="Objetivo 2">
+          <h4>Objetivo 2</h4>
+          <p>Describe aquí el objetivo.</p>
+          <img src="Imagenes_Objetivos/objetivo2.jpg" alt="Objetivo 2">
         </div>
         <div class="objetivo-item">
           <h4>Objetivo 3</h4>
@@ -324,6 +356,8 @@
     </div>
   </div>
 
+  <button id="btnInicio" class="btn-inicio" onclick="irArriba()">Inicio</button>
+
   <script>
     function mostrarSeccion(id, btn) {
       document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
@@ -331,6 +365,19 @@
       document.getElementById(id).classList.add('activa');
       btn.classList.add('activa');
     }
+
+    function irArriba() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('btnInicio');
+      if (window.scrollY > 200) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
   </script>
 </body>
 </html>
