@@ -308,19 +308,33 @@
     }
 
     .practica-btn {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       background: rgba(255,255,255,0.7);
       border: 2px solid transparent;
       border-radius: 14px;
-      padding: 22px 16px;
+      padding: 16px;
       text-align: center;
       color: #2c3e50;
       font-weight: 600;
       font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
       text-decoration: none;
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .practica-btn span {
+      margin-bottom: 12px;
+    }
+
+    .practica-btn img {
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 10px;
     }
 
     .practica-btn:hover {
@@ -472,10 +486,22 @@
         <h3>Documentación de Prácticas</h3>
         <p>Selecciona la práctica que quieres ver.</p>
         <div class="practicas-grid">
-          <button class="practica-btn" onclick="mostrarPractica('practica1')">Práctica 1</button>
-          <button class="practica-btn" onclick="mostrarPractica('practica2')">Práctica 2</button>
-          <button class="practica-btn" onclick="mostrarPractica('practica3')">Práctica 3</button>
-          <button class="practica-btn" onclick="mostrarPractica('practica4')">Práctica 4</button>
+          <button class="practica-btn" onclick="mostrarPractica('practica1')">
+            <span>Práctica 1</span>
+            <img src="Fotos_Practicas/practica1_1.jpg" alt="Práctica 1">
+          </button>
+          <button class="practica-btn" onclick="mostrarPractica('practica2')">
+            <span>Práctica 2</span>
+            <img src="Fotos_Practicas/practica2_1.jpg" alt="Práctica 2">
+          </button>
+          <button class="practica-btn" onclick="mostrarPractica('practica3')">
+            <span>Práctica 3</span>
+            <img src="Fotos_Practicas/practica3_1.jpg" alt="Práctica 3">
+          </button>
+          <button class="practica-btn" onclick="mostrarPractica('practica4')">
+            <span>Práctica 4</span>
+            <img src="Fotos_Practicas/practica4_1.jpg" alt="Práctica 4">
+          </button>
         </div>
       </div>
 
