@@ -553,50 +553,10 @@
             <p>Escribe aquí el contenido / pasos de esta sección.</p>
           </div>
           <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Descarga_Kicad.png" alt="KiCad">
+            <img src="Fotos_Practicas/practica1_1.jpg" alt="KiCad">
           </div>
         </div>
       </div>
-
-    </div>
-  </div>
-
-  <button id="btnInicio" class="btn-inicio" onclick="irArriba()">Inicio</button>
-
-  <script>
-    function mostrarSeccion(id, btn) {
-      document.querySelectorAll('.seccion').forEach(s => s.classList.remove('activa'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('activa'));
-      document.getElementById(id).classList.add('activa');
-      btn.classList.add('activa');
-    }
-
-    function mostrarPractica(id) {
-      document.getElementById('listaPracticas').classList.add('oculto');
-      document.querySelectorAll('.detalle-practica').forEach(d => d.classList.remove('activo'));
-      document.getElementById(id).classList.add('activo');
-    }
-
-    function volverALista() {
-      document.querySelectorAll('.detalle-practica').forEach(d => d.classList.remove('activo'));
-      document.getElementById('listaPracticas').classList.remove('oculto');
-    }
-
-    function irArriba() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    window.addEventListener('scroll', () => {
-      const btn = document.getElementById('btnInicio');
-      if (window.scrollY > 200) {
-        btn.classList.add('visible');
-      } else {
-        btn.classList.remove('visible');
-      }
-    });
-  </script>
-</body>
-</html>
 
     </div>
   </div>
