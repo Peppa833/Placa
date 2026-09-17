@@ -464,6 +464,13 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.15);
     }
 
+    /* Clase especial para hacer más alta la imagen del esquemático */
+    .practica-imagen img.imagen-alta {
+      aspect-ratio: auto;
+      height: 420px;
+      object-fit: contain;
+    }
+
     @media (max-width: 700px) {
       .practica-columnas {
         flex-direction: column;
@@ -558,10 +565,10 @@
             <img src="Fotos_Practica1_KiCad/Descarga_Kicad.png" alt="KiCad">
           </div>
         </div>
-
+// Esquematico texto
         <div class="practica-columnas" style="margin-top:35px;">
           <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Esquematico.png" alt="Editor de Esquemas">
+            <img src="Fotos_Practica1_KiCad/Esquematico.png" alt="Editor de Esquemas" class="imagen-alta">
           </div>
           <div class="practica-texto">
             <h5 class="titulo-seccion">Editor de Esquemas</h5>
