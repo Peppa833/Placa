@@ -467,22 +467,9 @@
     .practica-imagen img {
       width: 100%;
       height: auto;
-      aspect-ratio: 1113 / 405;
-      object-fit: cover;
+      display: block;
       border-radius: 14px;
       box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    }
-
-    /* Imagen del esquemático: sin recorte, tamaño natural respetando proporción */
-    .practica-imagen img.imagen-alta {
-      aspect-ratio: auto;
-      width: 100%;
-      height: auto;
-      max-height: 480px;
-      object-fit: contain;
-      background: #ffffff;
-      box-shadow: none;
-      border-radius: 14px;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -572,10 +559,13 @@
               en la pagina web encontraras el boton de instalacion.</p>
           </div>
           <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Descargar_KiCad.png" alt="KiCad">
+            <img src="Fotos_Practica1_KiCad/Descarga_Kicad.png" alt="KiCad">
           </div>
           <p style="order:3; margin:0; color:#444; font-size:1rem; line-height:1.6;">Va a seleccionar el sistema operativo de su preferencia y va a instalar KiCad.</p>
         </div>
+          <div class="practica-imagen">
+            <img src="Fotos_Practica1_KiCad/Descargar_KiCad_2.png" alt="KiCad">
+          </div>
 
         <h5 class="titulo-seccion" style="margin-top:35px;">Editor de Esquemas</h5>
         <div class="practica-columnas">
