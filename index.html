@@ -435,13 +435,12 @@
 
     .practica-columnas {
       display: flex;
-      gap: 30px;
-      align-items: stretch;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .practica-texto {
-      flex: 1 1 300px;
+      order: 1;
     }
 
     .practica-texto p {
@@ -452,9 +451,7 @@
     }
 
     .practica-imagen {
-      flex: 1 1 300px;
-      display: flex;
-      align-self: stretch;
+      order: 2;
     }
 
     .practica-imagen img {
@@ -466,22 +463,16 @@
       box-shadow: 0 8px 18px rgba(0,0,0,0.15);
     }
 
-    /* Imagen del esquemático: se adapta al alto del texto y sin contorno */
+    /* Imagen del esquemático: sin recorte, tamaño natural respetando proporción */
     .practica-imagen img.imagen-alta {
       aspect-ratio: auto;
       width: 100%;
       height: auto;
-      max-height: 100%;
+      max-height: 480px;
       object-fit: contain;
       background: #ffffff;
       box-shadow: none;
       border-radius: 14px;
-    }
-
-    @media (max-width: 700px) {
-      .practica-columnas {
-        flex-direction: column;
-      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -563,6 +554,7 @@
         <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
         <h4>Uso de KiCad para la fabricacion de la PCB</h4>
         <p class="subtitulo">Documentación de el uso de KiCad.</p>
+
         <h5 class="titulo-seccion">Descargar el programa</h5>
         <div class="practica-columnas">
           <div class="practica-texto">
@@ -572,20 +564,21 @@
             <img src="Fotos_Practica1_KiCad/Descarga_Kicad.png" alt="KiCad">
           </div>
         </div>
-        <div class="practica-columnas" style="margin-top:35px;">
-          <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Esquematico.png" alt="Editor de Esquemas" class="imagen-alta">
-          </div>
+
+        <h5 class="titulo-seccion" style="margin-top:35px;">Editor de Esquemas</h5>
+        <div class="practica-columnas">
           <div class="practica-texto">
-            <h5 class="titulo-seccion">Editor de Esquemas</h5>
             <p>Se utiliza el editor de esquemas de KiCad donde se empieza el diseño de el circuito en base a lo que explico el profesor con anterioridad, para la fabricacion del circuito se utilizan los componentes de la libreria de FabLab.</p>
             <p>El circuito cuenta con una fuente de alimentacion de 3.3V y una tierra o (GND), se añadieron 8 resistencias y 4 LED's con 4 botones para que cada boton pudiera controlar un LED, gracias a cada resistencia se regula el paso de corriente y se evitan cortocircuitos, gracias a esta practica se comprende mejor el uso de KiCad y de los componentes.</p>
           </div>
+          <div class="practica-imagen">
+            <img src="Fotos_Practica1_KiCad/Esquematico.png" alt="Editor de Esquemas" class="imagen-alta">
+          </div>
         </div>
 
-        <div class="practica-columnas" style="margin-top:35px;">
+        <h5 class="titulo-seccion" style="margin-top:35px;">Editor de Placas</h5>
+        <div class="practica-columnas">
           <div class="practica-texto">
-            <h5 class="titulo-seccion">Editor de Placas</h5>
             <p>Despues de terminar con el esquema, se procede al editor de placas de KiCad, se realiza la distribucion de los
               componentes agregados y conectados en el editor de esquemas para despues proceder a enrutar los componentes para establecer las conexiones
             </p>
@@ -597,20 +590,18 @@
           </div>
         </div>
 
-        <!-- ===== NUEVO BLOQUE: imagen a la izquierda, texto a la derecha ===== -->
-        <div class="practica-columnas" style="margin-top:35px;">
-          <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Mods.png" alt="Mods" class="imagen-alta">
-          </div>
+        <h5 class="titulo-seccion" style="margin-top:35px;">Mods</h5>
+        <div class="practica-columnas">
           <div class="practica-texto">
-            <h5 class="titulo-seccion">Mods</h5>
             <p>Despues de finalizar el trabajo en el editor de placas se exporta la placa en archivo SVG y se procede a abrir la pagina web llamada Mods.</p>
             <p>Mods permite ajustar los parametros para el maquinado en la MonoFab, gracias a mods pudimos modificar difentes configuraciones solicitadas por el profesor
               como el diametro de broca, numero de rotaciones, velocidad de corte, numero de pasadas asi como otros parametros necesarios para un resultado sin errores, 
               finalmente se vuelven a guardar los archivos preparados para la maquina de corte.</p>
           </div>
+          <div class="practica-imagen">
+            <img src="Fotos_Practica1_KiCad/Mods.png" alt="Mods" class="imagen-alta">
+          </div>
         </div>
-        <!-- ===== FIN DEL NUEVO BLOQUE ===== -->
 
       </div>
 
