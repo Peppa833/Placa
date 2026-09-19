@@ -484,12 +484,20 @@
   <h1>Producción Electronica</h1>
 
   <div class="tabs">
-    <button class="tab-btn activa" onclick="mostrarSeccion('integrantes', this)">Integrantes</button>
+    <button class="tab-btn activa" onclick="mostrarSeccion('introduccion', this)">Introducción</button>
+    <button class="tab-btn" onclick="mostrarSeccion('integrantes', this)">Integrantes</button>
     <button class="tab-btn" onclick="mostrarSeccion('objetivos', this)">Objetivos</button>
     <button class="tab-btn" onclick="mostrarSeccion('documentacion', this)">Documentación</button>
   </div>
 
-  <div id="integrantes" class="seccion activa">
+  <div id="introduccion" class="seccion activa">
+    <div class="doc-tarjeta">
+      <h3>Introducción</h3>
+      <p>Escribe aquí una breve introducción sobre el proyecto: de qué trata la materia de Producción Electrónica, qué van a documentar en esta página y qué encontrará quien la visite.</p>
+    </div>
+  </div>
+
+  <div id="integrantes" class="seccion">
     <div class="tarjeta">
       <img src="Fotos_Integrantes/Alex.jpeg" alt="Alejandro Ruiz Corona">
       <div class="overlay">
@@ -591,7 +599,7 @@
           <div class="practica-imagen" style="order:4;">
             <img src="Fotos_Practica1_KiCad/Driver_FabLab.png" alt="FabLab">
           </div>
-          <p style="order:5; margin:0 0 16px; color:#444; font-size:1rem; line-height:1.6;"></p>Una vez finalizado ya puedes iniciar a fabricar.
+          <p style="order:5; margin:0; color:#444; font-size:1rem; line-height:1.6;">Una vez finalizado ya puedes iniciar a fabricar.</p>
         </div>
         </div>
 
@@ -599,10 +607,10 @@
 
       <div id="practica2" class="detalle-practica">
         <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
-        <h4>Fabricacion de Primera Placa</h4>
-        <p class="subtitulo">Documentación de la primera placa.</p>
+        <h4>Título de la Práctica 2</h4>
+        <p class="subtitulo">Documentación de la práctica 2.</p>
 
-        <h5 class="titulo-seccion">Crear Archivo Nuevo</h5>
+        <h5 class="titulo-seccion">Primer paso</h5>
         <div class="practica-columnas">
           <div class="practica-texto">
             <p>Describe aquí el primer paso de esta práctica.</p>
