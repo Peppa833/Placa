@@ -165,7 +165,7 @@
     }
 
     .doc-tarjeta {
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.9);
       border-radius: 20px;
       padding: 45px 60px;
       width: 100%;
@@ -191,7 +191,7 @@
       color: #444;
       font-size: 1.05rem;
       font-weight: 400;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .objetivos-especificos {
@@ -395,21 +395,25 @@
     .detalle-practica h4 {
       margin: 0 0 12px;
       color: #2c3e50;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
     }
 
     .detalle-practica .subtitulo {
-      margin: 0 0 20px;
+      margin: 0 0 28px;
       color: #8e44ad;
       font-size: 1.05rem;
       font-weight: 600;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(44,62,80,0.12);
     }
 
     .detalle-practica .titulo-seccion {
       margin: 0 0 16px;
       color: #2c3e50;
-      font-size: 1.15rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(142,68,173,0.25);
     }
 
     .detalle-practica p {
@@ -433,10 +437,20 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.12);
     }
 
+    /* Bloque de una sección de práctica (título + texto/imagen). Da aire entre secciones */
+    .paso-bloque {
+      margin-bottom: 44px;
+      padding-bottom: 8px;
+    }
+
+    .paso-bloque:last-child {
+      margin-bottom: 0;
+    }
+
     .practica-columnas {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
     .practica-texto {
@@ -447,7 +461,11 @@
       margin: 0 0 14px;
       color: #444;
       font-size: 1rem;
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+
+    .practica-texto p:last-child {
+      margin-bottom: 0;
     }
 
     .practica-texto p a {
@@ -466,8 +484,49 @@
       color: #2c3e50;
     }
 
+    /* Listas numeradas de pasos dentro de cada sección */
+    .practica-texto .pasos {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+      counter-reset: paso-contador;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .practica-texto .pasos li {
+      counter-increment: paso-contador;
+      position: relative;
+      padding-left: 38px;
+      color: #444;
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .practica-texto .pasos li::before {
+      content: counter(paso-contador);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #8e44ad;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .practica-imagen {
       order: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .practica-imagen img {
@@ -476,6 +535,22 @@
       display: block;
       border-radius: 14px;
       box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    @media (min-width: 820px) {
+      .practica-columnas {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 34px;
+      }
+      .practica-texto {
+        flex: 1 1 50%;
+        min-width: 0;
+      }
+      .practica-imagen {
+        flex: 1 1 50%;
+        min-width: 0;
+      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -574,52 +649,32 @@
         <h4>Uso de KiCad para la fabricacion de la PCB</h4>
         <p class="subtitulo">Documentación de el uso de KiCad.</p>
 
-        <h5 class="titulo-seccion">Descargar el programa</h5>
-
-        <div class="practica-columnas">
-          <div class="practica-texto">
-            <p>Se descargara el programa de KiCad para la fabricacion y diseño de circuitos en la siguiente pagina web <a href="https://www.kicad.org/" target="_blank">KiCad</a>, en la pagina web encontraras el boton de instalacion.</p>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Descargar_KiCad.png" alt="KiCad">
-          </div>
-        </div>
-
-        <div class="practica-columnas" style="margin-top:25px;">
-          <div class="practica-texto">
-            <p>Va a seleccionar el sistema operativo de su preferencia y va a instalar KiCad.</p>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Descargar_KiCad_2.png" alt="KiCad">
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">1. Descargar el programa</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <p>Se descargara el programa de KiCad para la fabricacion y diseño de circuitos en la siguiente pagina web <a href="https://www.kicad.org/" target="_blank">KiCad</a>, en la pagina web encontraras el boton de instalacion.</p>
+              <p>Va a seleccionar el sistema operativo de su preferencia y va a instalar KiCad.</p>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica1_KiCad/Descargar_KiCad.png" alt="KiCad">
+              <img src="Fotos_Practica1_KiCad/Descargar_KiCad_2.png" alt="KiCad">
+            </div>
           </div>
         </div>
 
-        <h5 class="titulo-seccion" style="margin-top:35px;">Instalacion libreria FabLab</h5>
-
-        <div class="practica-columnas">
-          <div class="practica-texto">
-            <p>Una vez con el programa KiCad instalado, se debe hacer la instalacion de la libreria llamada FabLab, debe entrar a el administrador de elementos y contenido de la siguiente manera, puede acceder de las siguientes 2 formas como se indica en la siguiente imagen.</p>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Descargar_FabLab.png" alt="FabLab">
-          </div>
-        </div>
-
-        <div class="practica-columnas" style="margin-top:25px;">
-          <div class="practica-texto">
-            <p>Una vez en el administrador de elementos y contenido se instala la libreria FabLab.</p>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Driver_FabLab.png" alt="FabLab">
-          </div>
-        </div>
-
-        <div class="practica-columnas" style="margin-top:25px;">
-          <div class="practica-texto">
-            <p>Una vez finalizado ya puedes iniciar a fabricar.</p>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica1_KiCad/Driver_FabLab.png" alt="FabLab">
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">2. Instalacion libreria FabLab</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <p>Una vez con el programa KiCad instalado, se debe hacer la instalacion de la libreria llamada FabLab, debe entrar a el administrador de elementos y contenido de la siguiente manera, puede acceder de las siguientes 2 formas como se indica en la siguiente imagen.</p>
+              <p>Una vez en el administrador de elementos y contenido se instala la libreria FabLab.</p>
+              <p>Una vez finalizado ya puedes iniciar a fabricar.</p>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica1_KiCad/Descargar_FabLab.png" alt="FabLab">
+              <img src="Fotos_Practica1_KiCad/Driver_FabLab.png" alt="FabLab">
+            </div>
           </div>
         </div>
 
@@ -629,77 +684,76 @@
         <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
         <h4>Fabricacion de Primera Placa</h4>
         <p class="subtitulo">Documentación de fabricacion.</p>
-        <div class="practica-columnas">
-<div class="practica-texto">
- <h5 class="titulo-seccion">1. Crear un nuevo proyecto</h5>
-        <ol class="pasos">
-          <li>Ir al menú Archivo y seleccionar Nuevo proyecto.</li>
-          <li>Seleccionar la plantilla correspondiente al proyecto.</li>
-          <li>Al crear el proyecto aparecerán las herramientas del proyecto, incluyendo el editor de esquemas y el editor de placas.</li>
-        </ol>
 
-</div>
- 
-       
-          <div class="practica-imagen">
-            <img src="Fotos_Practica2_Placa/Nuevo_Proyecto.png" alt="Nuevo Proyecto">
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">1. Crear un nuevo proyecto</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Ir al menú Archivo y seleccionar Nuevo proyecto.</li>
+                <li>Seleccionar la plantilla correspondiente al proyecto.</li>
+                <li>Al crear el proyecto aparecerán las herramientas del proyecto, incluyendo el editor de esquemas y el editor de placas.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica2_Placa/Nuevo_Proyecto.png" alt="Nuevo Proyecto">
+            </div>
           </div>
         </div>
 
-        <div class="practica-columnas" style="margin-top:25px;">
-          <div class="practica-texto">
-            <h5 class="titulo-seccion">2. Abrir el editor de esquemas</h5>
-        <ol class="pasos">
-          <li>Seleccionar el editor de esquemas.</li>
-          <li>Agregar los componentes.</li>
-          <li>Buscar cada componente y comprobar que tenga huella.</li>
-          <li>Colocar los componentes y realizar las conexiones.</li>
-          <li>Ejecutar ERC y corregir los errores encontrados.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica2_Placa/Abrir_Esquematico.png" alt="Abrir Esquematico">
-            <img src="Fotos_Practica2_Placa/Resistor.png" alt="Resistor">
-            <img src="Fotos_Practica2_Placa/ERC.png" alt="ERC">
-          </div>
-        </div>
-        
-
-        <div class="practica-columnas">
-          <div class="practica-texto">
-            <h5 class="titulo-seccion">3. Abrir el editor de placas</h5>
-        <ol class="pasos">
-          <li>Entrar al editor de PCB desde el proyecto.</li>
-          <li>Importar los elementos provenientes del esquemático.</li>
-          <li>Ordenar los componentes dentro del área de la placa.</li>
-          <li>Definir y revisar las capas que se utilizarán.</li>
-          <li>Crear las pistas y revisar su ancho.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica2_Placa/Editor_PCB.png" alt="Editor PCB">
-            <img src="Fotos_Practica2_Placa/Importar_esquematico.png" alt="Importar esquematico">
-            <img src="Fotos_Practica2_Placa/Ancho_pista.png" alt="Ancho pista">
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">2. Abrir el editor de esquemas</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Seleccionar el editor de esquemas.</li>
+                <li>Agregar los componentes.</li>
+                <li>Buscar cada componente y comprobar que tenga huella.</li>
+                <li>Colocar los componentes y realizar las conexiones.</li>
+                <li>Ejecutar ERC y corregir los errores encontrados.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica2_Placa/Abrir_Esquematico.png" alt="Abrir Esquematico">
+              <img src="Fotos_Practica2_Placa/Resistor.png" alt="Resistor">
+              <img src="Fotos_Practica2_Placa/ERC.png" alt="ERC">
+            </div>
           </div>
         </div>
 
-        <div class="practica-columnas" style="margin-top:25px;">
-          <div class="practica-texto">
-            <h5 class="titulo-seccion">4. Revisar el diseño</h5>
-        <ol class="pasos">
-          <li>Ejecutar DRC.</li>
-          <li>Corregir los errores encontrados.</li>
-          <li>Comprobar que las conexiones estén completas y que el contorno de la placa esté correctamente definido.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica2_Placa/DRC.png" alt="DRC">
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">3. Abrir el editor de placas</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Entrar al editor de PCB desde el proyecto.</li>
+                <li>Importar los elementos provenientes del esquemático.</li>
+                <li>Ordenar los componentes dentro del área de la placa.</li>
+                <li>Definir y revisar las capas que se utilizarán.</li>
+                <li>Crear las pistas y revisar su ancho.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica2_Placa/Editor_PCB.png" alt="Editor PCB">
+              <img src="Fotos_Practica2_Placa/Importar_esquematico.png" alt="Importar esquematico">
+              <img src="Fotos_Practica2_Placa/Ancho_pista.png" alt="Ancho pista">
+            </div>
           </div>
         </div>
 
-        <div class="practica-columnas" style="margin-top:25px;">
-          <div class="practica-texto">
-            
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">4. Revisar el diseño</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Ejecutar DRC.</li>
+                <li>Corregir los errores encontrados.</li>
+                <li>Comprobar que las conexiones estén completas y que el contorno de la placa esté correctamente definido.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica2_Placa/DRC.png" alt="DRC">
+            </div>
           </div>
         </div>
 
@@ -708,71 +762,89 @@
       <div id="practica3" class="detalle-practica">
         <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
         <h4>Mods</h4>
-        <div class="practica-columnas">
-<div class="practica-texto">
-        <h5 class="titulo-seccion">1. Entrar a Mods</h5>
-        <ol class="pasos">
-          <li>Abrir el programa de Mods.</li>
-          <li>Seleccionar el programa correspondiente a la máquina de fabricación.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica3_Mods/Programa.png" alt="Programa">
-          </div>
-        </div>
-         <div class="practica-columnas">
-<div class="practica-texto">
-        <h5 class="titulo-seccion">2. Seleccionar el archivo</h5>
-        <ol class="pasos">
-          <li>Seleccionar el archivo exportado desde KiCad.</li>
-          <li>Mantener identificados por separado los archivos de pistas, etiquetas, perforaciones y contorno.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica3_Mods/Archivo.png" alt="Archivo">
+        <p class="subtitulo">Documentación del uso de Mods.</p>
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">1. Entrar a Mods</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Abrir el programa de Mods.</li>
+                <li>Seleccionar el programa correspondiente a la máquina de fabricación.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica3_Mods/Programa.png" alt="Programa">
+            </div>
           </div>
         </div>
-         <div class="practica-columnas">
-<div class="practica-texto">
-        <h5 class="titulo-seccion">3. Invertir la selección cuando sea necesario</h5>
-        <ol class="pasos">
-          <li>Revisar la vista previa del archivo.</li>
-          <li>Si las pistas o etiquetas aparecen invertidas, utilizar la opción de Invert indicada en Mods.</li>
-          <li>Comprobar nuevamente la vista previa antes de continuar.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica3_Mods/Invertir.png" alt="Invertir">
-          </div>
-        </div>
-         <div class="practica-columnas">
-<div class="practica-texto">
-        <h5 class="titulo-seccion">4. Seleccionar el tipo de cortador</h5>
-        <ol class="pasos">
-          <li>Seleccionar el tipo de cortador correspondiente.</li>
-          <li>Revisar los parámetros mostrados por Mods.</li>
-          <li>Comparar el resultado de la vista previa con el diseño original.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica3_Mods/Cortador.png" alt="Cortador">
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">2. Seleccionar el archivo</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Seleccionar el archivo exportado desde KiCad.</li>
+                <li>Mantener identificados por separado los archivos de pistas, etiquetas, perforaciones y contorno.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica3_Mods/Archivo.png" alt="Archivo">
+            </div>
           </div>
         </div>
-         <div class="practica-columnas">
-<div class="practica-texto">
-        <h5 class="titulo-seccion">5. Configuración de origen y guardar</h5>
-        <ol class="pasos">
-          <li>Configurar el origen del archivo.</li>
-          <li>Comprobar que la posición del diseño coincida con la orientación esperada.</li>
-          <li>Guardar los archivos.</li>
-        </ol>
-          </div>
-          <div class="practica-imagen">
-            <img src="Fotos_Practica3_Mods/Origen.png" alt="Origen">
-            <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">3. Invertir la selección cuando sea necesario</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Revisar la vista previa del archivo.</li>
+                <li>Si las pistas o etiquetas aparecen invertidas, utilizar la opción de Invert indicada en Mods.</li>
+                <li>Comprobar nuevamente la vista previa antes de continuar.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica3_Mods/Invertir.png" alt="Invertir">
+            </div>
           </div>
         </div>
-  
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">4. Seleccionar el tipo de cortador</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Seleccionar el tipo de cortador correspondiente.</li>
+                <li>Revisar los parámetros mostrados por Mods.</li>
+                <li>Comparar el resultado de la vista previa con el diseño original.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica3_Mods/Cortador.png" alt="Cortador">
+            </div>
+          </div>
+        </div>
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">5. Configuración de origen y guardar</h5>
+          <div class="practica-columnas">
+            <div class="practica-texto">
+              <ol class="pasos">
+                <li>Configurar el origen del archivo.</li>
+                <li>Comprobar que la posición del diseño coincida con la orientación esperada.</li>
+                <li>Guardar los archivos.</li>
+              </ol>
+            </div>
+            <div class="practica-imagen">
+              <img src="Fotos_Practica3_Mods/Origen.png" alt="Origen">
+              <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
   </div>
 
