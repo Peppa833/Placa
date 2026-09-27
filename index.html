@@ -113,77 +113,229 @@
       max-width: 1200px;
     }
 
-    .tarjeta {
-      position: relative;
-      border-radius: 18px;
-      width: 180px;
-      height: 230px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-      opacity: 0;
-      transform: translateY(30px) scale(0.9);
-      animation: entrarTarjeta 0.6s ease-out forwards;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      border: 1px solid rgba(142,68,173,0.25);
+    #integrantes.activa {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: 1000px;
     }
 
-    .tarjeta:nth-child(1) { animation-delay: 0.3s; }
-    .tarjeta:nth-child(2) { animation-delay: 0.5s; }
-    .tarjeta:nth-child(3) { animation-delay: 0.7s; }
+    /* =====================================================
+       SECCIÓN INTEGRANTES
+       ===================================================== */
+    .integrantes-wrap {
+      width: 100%;
+      background: linear-gradient(145deg, #1a1a2e, #16162a);
+      border-radius: 24px;
+      padding: 50px 60px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(142,68,173,0.18);
+      position: relative;
+      overflow: hidden;
+      animation: aparecerArriba 0.5s ease-out both;
+    }
+
+    .integrantes-wrap::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #8e44ad, #4078ff, transparent);
+    }
+
+    .integrantes-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .integrantes-header h3 {
+      margin: 0 0 14px;
+      color: #ffffff;
+      font-size: 1.9rem;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    .integrantes-header h3::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, #8e44ad, #4078ff);
+      border-radius: 4px;
+      margin: 14px auto 0;
+      box-shadow: 0 0 12px rgba(142,68,173,0.6);
+    }
+
+    .integrantes-header p {
+      margin: 0;
+      color: #b8b8cc;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .integrantes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 10px;
+    }
+
+    .tarjeta {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      border: 1px solid rgba(142,68,173,0.25);
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      animation: entrarTarjeta 0.6s ease-out forwards;
+      background: linear-gradient(145deg, #1f1f38, #191932);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tarjeta:nth-child(1) { animation-delay: 0.2s; }
+    .tarjeta:nth-child(2) { animation-delay: 0.4s; }
 
     @keyframes entrarTarjeta {
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .tarjeta:hover {
-      transform: translateY(-10px) scale(1.04);
-      box-shadow: 0 20px 40px rgba(142,68,173,0.45);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 22px 45px rgba(142,68,173,0.5);
       border-color: #a55fc4;
     }
 
-    .tarjeta img {
+    .tarjeta .tarjeta-foto {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 4.5;
+      overflow: hidden;
+    }
+
+    .tarjeta .tarjeta-foto img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
     }
 
-    .tarjeta:hover img {
-      transform: scale(1.1);
+    .tarjeta:hover .tarjeta-foto img {
+      transform: scale(1.08);
     }
 
-    .tarjeta .overlay {
+    .tarjeta .tarjeta-foto::after {
+      content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: 28px 14px 16px;
-      background: linear-gradient(to top, rgba(15,15,26,0.98) 20%, rgba(15,15,26,0.6) 65%, rgba(15,15,26,0));
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,15,26,0.85) 0%, rgba(15,15,26,0.1) 55%, transparent 100%);
+      pointer-events: none;
     }
 
-    .tarjeta .overlay .nombre {
+    .tarjeta .tarjeta-numero {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8e44ad, #6f3588);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 18px rgba(142,68,173,0.65);
+      border: 1px solid rgba(197,164,255,0.4);
+      z-index: 2;
+    }
+
+    .tarjeta .tarjeta-info {
+      padding: 22px 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+      position: relative;
+    }
+
+    .tarjeta .tarjeta-nombre {
       margin: 0;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 700;
       color: #ffffff;
-      font-size: 1rem;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+      letter-spacing: 0.3px;
       transition: color 0.3s ease;
     }
 
-    .tarjeta:hover .nombre {
+    .tarjeta:hover .tarjeta-nombre {
       color: #c5a4ff;
     }
 
-    .tarjeta .overlay .dato {
-      margin: 4px 0 0;
-      font-weight: 400;
-      color: #b8b8cc;
-      font-size: 0.78rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    .tarjeta .tarjeta-datos {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
     }
 
+    .tarjeta .tarjeta-dato {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #b8b8cc;
+      font-size: 0.9rem;
+      font-weight: 500;
+      word-break: break-all;
+    }
+
+    .tarjeta .tarjeta-dato svg {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: #c5a4ff;
+    }
+
+    .tarjeta .tarjeta-dato a {
+      color: #c5a4ff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .tarjeta .tarjeta-dato a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .integrantes-footer {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(142,68,173,0.2);
+      text-align: center;
+      color: #9a9ab0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .integrantes-footer strong {
+      color: #c5a4ff;
+      font-weight: 600;
+    }
+
+    /* =====================================================
+       DOCUMENTACIÓN
+       ===================================================== */
     .doc-tarjeta {
       background: linear-gradient(145deg, #1a1a2e, #16162a);
       border-radius: 24px;
@@ -755,8 +907,46 @@
       }
 
       #objetivos.activa,
-      #documentacion.activa {
+      #documentacion.activa,
+      #integrantes.activa {
         max-width: 100%;
+      }
+
+      .integrantes-wrap {
+        padding: 28px 18px;
+        border-radius: 18px;
+      }
+
+      .integrantes-header h3 {
+        font-size: 1.4rem;
+      }
+
+      .integrantes-header h3::after {
+        width: 50px;
+        height: 3px;
+      }
+
+      .integrantes-header p {
+        font-size: 0.95rem;
+      }
+
+      .integrantes-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .tarjeta .tarjeta-nombre {
+        font-size: 1.05rem;
+      }
+
+      .tarjeta .tarjeta-dato {
+        font-size: 0.85rem;
+      }
+
+      .integrantes-footer {
+        font-size: 0.88rem;
+        margin-top: 28px;
+        padding-top: 22px;
       }
 
       .doc-tarjeta {
@@ -775,19 +965,6 @@
 
       .doc-tarjeta p {
         font-size: 0.95rem;
-      }
-
-      .tarjeta {
-        width: 150px;
-        height: 200px;
-      }
-
-      .tarjeta .overlay .nombre {
-        font-size: 0.9rem;
-      }
-
-      .tarjeta .overlay .dato {
-        font-size: 0.72rem;
       }
 
       .objetivos-especificos {
@@ -906,6 +1083,32 @@
         padding: 8px 12px;
       }
 
+      .integrantes-wrap {
+        padding: 22px 14px;
+      }
+
+      .integrantes-header h3 {
+        font-size: 1.2rem;
+      }
+
+      .tarjeta .tarjeta-info {
+        padding: 16px 16px 20px;
+      }
+
+      .tarjeta .tarjeta-nombre {
+        font-size: 1rem;
+      }
+
+      .tarjeta .tarjeta-dato {
+        font-size: 0.8rem;
+      }
+
+      .tarjeta .tarjeta-numero {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+      }
+
       .doc-tarjeta {
         padding: 20px 12px;
       }
@@ -934,11 +1137,6 @@
       .item-texto p {
         font-size: 0.88rem;
       }
-
-      .tarjeta {
-        width: 135px;
-        height: 185px;
-      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -961,20 +1159,69 @@
   </div>
 
   <div id="integrantes" class="seccion">
-    <div class="tarjeta">
-      <img src="Fotos_Integrantes/Alex.jpeg" alt="Alejandro Ruiz Corona">
-      <div class="overlay">
-        <p class="nombre">Alejandro Ruiz Corona</p>
-        <p class="dato">Matrícula: 203982</p>
-        <p class="dato">203982@iberopuebla.mx</p>
+    <div class="integrantes-wrap">
+      <div class="integrantes-header">
+        <h3>Equipo de Trabajo</h3>
+        <p>Estudiantes de la materia de Producción Electrónica, encargados de documentar cada práctica, proceso y aprendizaje desarrollado a lo largo del curso.</p>
       </div>
-    </div>
-    <div class="tarjeta">
-      <img src="Fotos_Integrantes/Cano.jpeg" alt="Jorge Fernando Cano Garcia">
-      <div class="overlay">
-        <p class="nombre">Jorge Fernando Cano Garcia</p>
-        <p class="dato">Matrícula: 200763</p>
-        <p class="dato">200763@iberopuebla.mx</p>
+
+      <div class="integrantes-grid">
+        <div class="tarjeta">
+          <div class="tarjeta-foto">
+            <img src="Fotos_Integrantes/Alex.jpeg" alt="Alejandro Ruiz Corona">
+            <div class="tarjeta-numero">01</div>
+          </div>
+          <div class="tarjeta-info">
+            <p class="tarjeta-nombre">Alejandro Ruiz Corona</p>
+            <div class="tarjeta-datos">
+              <div class="tarjeta-dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M7 9h10M7 13h6"/>
+                </svg>
+                <span>Matrícula: 203982</span>
+              </div>
+              <div class="tarjeta-dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="M22 6l-10 7L2 6"/>
+                </svg>
+                <a href="mailto:203982@iberopuebla.mx">203982@iberopuebla.mx</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tarjeta">
+          <div class="tarjeta-foto">
+            <img src="Fotos_Integrantes/Cano.jpeg" alt="Jorge Fernando Cano Garcia">
+            <div class="tarjeta-numero">02</div>
+          </div>
+          <div class="tarjeta-info">
+            <p class="tarjeta-nombre">Jorge Fernando Cano Garcia</p>
+            <div class="tarjeta-datos">
+              <div class="tarjeta-dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2"/>
+                  <path d="M7 9h10M7 13h6"/>
+                </svg>
+                <span>Matrícula: 200763</span>
+              </div>
+              <div class="tarjeta-dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="M22 6l-10 7L2 6"/>
+                </svg>
+                <a href="mailto:200763@iberopuebla.mx">200763@iberopuebla.mx</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="integrantes-footer">
+        <strong>Universidad Iberoamericana Puebla</strong><br>
+        Producción Electrónica · Ciclo 2025
       </div>
     </div>
   </div>
@@ -1022,8 +1269,8 @@
               <img src="Fotos_Portadas/Kicad_Inicio.png" alt="KiCad">
             </div>
             <div class="practica-info">
-              <span class="practica-titulo">Instalacion de KiCad</span>
-              <span class="practica-sub">Instalacion del programa</span>
+              <span class="practica-titulo">KiCad</span>
+              <span class="practica-sub">Uso del programa</span>
             </div>
           </button>
           <button class="practica-btn" onclick="mostrarPractica('practica2')">
@@ -1031,7 +1278,7 @@
               <img src="Fotos_Portadas/Primera_placa.png" alt="Práctica 2">
             </div>
             <div class="practica-info">
-              <span class="practica-titulo">Fabricacion Primera Placa en KiCad</span>
+              <span class="practica-titulo">Fabricacion Primera Placa</span>
               <span class="practica-sub">Proceso completo</span>
             </div>
           </button>
