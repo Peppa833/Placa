@@ -423,21 +423,6 @@
       line-height: 1.6;
     }
 
-    .detalle-practica .imagenes-practica {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .detalle-practica .imagenes-practica img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-    }
-
-    /* Bloque de una sección de práctica (título + texto/imagen). Da aire entre secciones */
     .paso-bloque {
       margin-bottom: 44px;
       padding-bottom: 8px;
@@ -447,114 +432,6 @@
       margin-bottom: 0;
     }
 
-    .practica-columnas {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .practica-texto {
-      order: 1;
-    }
-
-    .practica-texto p {
-      margin: 0 0 14px;
-      color: #444;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .practica-texto p:last-child {
-      margin-bottom: 0;
-    }
-
-    .practica-texto p a {
-      display: inline;
-      background: none;
-      padding: 0;
-      border-radius: 0;
-      color: #8e44ad;
-      font-weight: 600;
-      text-decoration: underline;
-    }
-
-    .practica-texto p a:hover {
-      background: none;
-      transform: none;
-      color: #2c3e50;
-    }
-
-    /* Listas numeradas de pasos dentro de cada sección */
-    .practica-texto .pasos {
-      margin: 0;
-      padding-left: 0;
-      list-style: none;
-      counter-reset: paso-contador;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .practica-texto .pasos li {
-      counter-increment: paso-contador;
-      position: relative;
-      padding-left: 38px;
-      color: #444;
-      font-size: 1rem;
-      line-height: 1.6;
-      text-align: left;
-    }
-
-    .practica-texto .pasos li::before {
-      content: counter(paso-contador);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: #8e44ad;
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .practica-imagen {
-      order: 2;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .practica-imagen img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 14px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    }
-
-    @media (min-width: 820px) {
-      .practica-columnas {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 34px;
-      }
-      .practica-texto {
-        flex: 1 1 50%;
-        min-width: 0;
-      }
-      .practica-imagen {
-        flex: 1 1 50%;
-        min-width: 0;
-      }
-    }
-
-    /* Pares texto + imagen: un párrafo de texto junto a SU foto correspondiente,
-       con un mini-subtítulo (figcaption) debajo de cada imagen */
     .practica-item {
       display: flex;
       flex-direction: column;
@@ -830,82 +707,94 @@
               <p>Una vez dentro del esquematico debemos agregar los componentes que necesitemos para la fabricacion de la Placa, gracias a la libreria FabLab tenemos todo lo necesario, para buscar un componente se puede oprimir la tecla "A" o en el boton indicado en la siguiente imagen.</p>
             </div>
             <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Tecla_esquema.png" alt="Resistor">
+              <img src="Fotos_Practica2_Placa/Tecla_esquema.png" alt="Esquema">
               <figcaption>Abrir componentes en esquematico</figcaption>
             </figure>
           </div>
 
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Colocar los componentes y realizar las conexiones.</li>
-                <li>Ejecutar ERC y corregir los errores encontrados.</li>
-              </ol>
+              <p>Una vez abierto nuestro selector de componentes podemos buscar los componentes que ocupemos para nuestro trabajo buscando en la barra de busqueda ubicada en la parte superior izquierda, es importante que los componentes que escogamos tengan huella ya que sin huella nuestros componentes no serviran cuando cambiemos al editor de placas el ejemplo de la huella esta en la siguiente imagen.</p>
             </div>
             <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/ERC.png" alt="ERC">
-              <figcaption>Revisión ERC</figcaption>
+              <img src="Fotos_Practica2_Placa/Huella.png" alt="R3">
+              <figcaption>Selector de componentes</figcaption>
             </figure>
           </div>
         </div>
 
         <div class="paso-bloque">
-          <h5 class="titulo-seccion">4. Abrir el editor de placas</h5>
+          <h5 class="titulo-seccion">4. Fabricacion circuito en esquematico</h5>
 
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Entrar al editor de PCB desde el proyecto.</li>
-              </ol>
+              <p>Una vez que hayamos agregado todos los componentes necesarios, podemos proceder a la fabricación del circuito en el esquematico, tenemos 2 maneras de unir los componentes la primera es presionando la tecla "V" para usar dibujar cables o la segunda presionando el boton dibujar cables que se muestra en la siguiente imagen.</p>
             </div>
             <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Editor_PCB.png" alt="Editor PCB">
-              <figcaption>Editor de PCB</figcaption>
-            </figure>
-          </div>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <ol class="pasos" start="2">
-                <li>Importar los elementos provenientes del esquemático.</li>
-                <li>Ordenar los componentes dentro del área de la placa.</li>
-                <li>Definir y revisar las capas que se utilizarán.</li>
-              </ol>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Importar_esquematico.png" alt="Importar esquematico">
-              <figcaption>Importación del esquemático</figcaption>
-            </figure>
-          </div>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <ol class="pasos" start="5">
-                <li>Crear las pistas y revisar su ancho.</li>
-              </ol>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Ancho_pista.png" alt="Ancho pista">
-              <figcaption>Ancho de pista</figcaption>
+              <img src="Fotos_Practica2_Placa/Dibujar_cables.png" alt="Cables">
+              <figcaption>Boton Dibujar Cables</figcaption>
             </figure>
           </div>
         </div>
 
         <div class="paso-bloque">
-          <h5 class="titulo-seccion">5. Revisar el diseño</h5>
+          <h5 class="titulo-seccion">5. DRC (Design Rule Check)</h5>
+
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Ejecutar DRC.</li>
-                <li>Corregir los errores encontrados.</li>
-                <li>Comprobar que las conexiones estén completas y que el contorno de la placa esté correctamente definido.</li>
-              </ol>
+              <p>Una vez que hayamos terminado de dibujar los cables, podemos ejecutar el DRC para verificar que el diseño cumpla con las reglas de diseño, el boton de DRC se encuentra en la barra de herramientas superior central como se muestra en la imagen, tambien es conocido como "ERC" si su programa esta en español.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica2_Placa/DRC.png" alt="DRC">
-              <figcaption>Revisión DRC</figcaption>
+              <figcaption>Botón DRC</figcaption>
             </figure>
           </div>
+
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Una vez abierto el DRC debemos selecionar el boton que dice "Run DRC" o "Ejecutar ERC", nos mostrara los errores que tengamos en nuestro diseño, si no hay errores nos mostrara un mensaje de que no hay errores y podemos continuar con la fabricación de la placa.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica2_Placa/Ejecutar_DRC.png" alt="Ejecutar DRC">
+              <figcaption>Botón Ejecutar DRC</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">6. Editor de placas</h5>
+
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Cuando nuestros diseños del esquematico estén listos, podemos pasar al editor de placas, para pasar al editor de placas tenemos un boton llamado cambiar al editor de placas en la barra de herramientas superior central, el ultimo boton a la derecha en la siguiente imagen se muestra con exactitud el boton.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica2_Placa/Editor_de_Placas.png" alt="Cambio a Editor de Placas">
+              <figcaption>Cambio a Editor de Placas</figcaption>
+            </figure>
+          </div>
+
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Para poder pasar nuestro circuito al editor de placas, debemos extraer la placa desde el esquematico, para ello utilizamos el boton "Extraer placa" o "Update Board" en la barra de herramientas superior central, indicado en la siguiente imagen.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica2_Placa/Extraer_placa.png" alt="Extraer placa">
+              <figcaption>Actualizar placa desde el esquematico</figcaption>
+            </figure>
+          </div>
+
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Una vez seleccionado el botón nos aparecerá la siguiente ventana, si su placa no marca errores podemos actualizar la placa desde el esquematico pulsando el boton de actualizar placa
+                como se muestra en la siguiente imagen.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica2_Placa/Ventana.png" alt="Descripción 2">
+              <figcaption>Ventana de actualización de placa</figcaption>
+            </figure>
+          </div>
+
         </div>
 
       </div>
@@ -919,10 +808,7 @@
           <h5 class="titulo-seccion">1. Entrar a Mods</h5>
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Abrir el programa de Mods.</li>
-                <li>Seleccionar el programa correspondiente a la máquina de fabricación.</li>
-              </ol>
+              <p>Abrir el programa de Mods y seleccionar el programa correspondiente a la máquina de fabricación.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Programa.png" alt="Programa">
@@ -935,10 +821,7 @@
           <h5 class="titulo-seccion">2. Seleccionar el archivo</h5>
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Seleccionar el archivo exportado desde KiCad.</li>
-                <li>Mantener identificados por separado los archivos de pistas, etiquetas, perforaciones y contorno.</li>
-              </ol>
+              <p>Seleccionar el archivo exportado desde KiCad. Mantener identificados por separado los archivos de pistas, etiquetas, perforaciones y contorno.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Archivo.png" alt="Archivo">
@@ -951,11 +834,7 @@
           <h5 class="titulo-seccion">3. Invertir la selección cuando sea necesario</h5>
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Revisar la vista previa del archivo.</li>
-                <li>Si las pistas o etiquetas aparecen invertidas, utilizar la opción de Invert indicada en Mods.</li>
-                <li>Comprobar nuevamente la vista previa antes de continuar.</li>
-              </ol>
+              <p>Revisar la vista previa del archivo. Si las pistas o etiquetas aparecen invertidas, utilizar la opción de Invert indicada en Mods. Comprobar nuevamente la vista previa antes de continuar.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Invertir.png" alt="Invertir">
@@ -968,11 +847,7 @@
           <h5 class="titulo-seccion">4. Seleccionar el tipo de cortador</h5>
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Seleccionar el tipo de cortador correspondiente.</li>
-                <li>Revisar los parámetros mostrados por Mods.</li>
-                <li>Comparar el resultado de la vista previa con el diseño original.</li>
-              </ol>
+              <p>Seleccionar el tipo de cortador correspondiente. Revisar los parámetros mostrados por Mods. Comparar el resultado de la vista previa con el diseño original.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Cortador.png" alt="Cortador">
@@ -986,10 +861,7 @@
 
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos">
-                <li>Configurar el origen del archivo.</li>
-                <li>Comprobar que la posición del diseño coincida con la orientación esperada.</li>
-              </ol>
+              <p>Configurar el origen del archivo. Comprobar que la posición del diseño coincida con la orientación esperada.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Origen.png" alt="Origen">
@@ -999,9 +871,7 @@
 
           <div class="practica-item">
             <div class="item-texto">
-              <ol class="pasos" start="3">
-                <li>Guardar los archivos.</li>
-              </ol>
+              <p>Guardar los archivos.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
