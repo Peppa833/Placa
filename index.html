@@ -1514,7 +1514,7 @@
           <div class="practica-item">
             <div class="item-texto">
               <p>Abrir el programa de Mods, dar click en la esquina superior izquierda en donde dice "Programs".</p>
-              <p>Despues bajar en la pestaña azul hasta SRM-20 mill y seleccionar la opcion de mill 2D PCB</p>
+              <p>Despues bajar en la pestaña azul hasta SRM-20 mill y seleccionar la opcion de "mill 2D PCB".</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/PROGRAMA.png" alt="PROGRAMA">
@@ -1524,10 +1524,10 @@
         </div>
 
         <div class="paso-bloque">
-          <h5 class="titulo-seccion">2. Seleccionar el archivo</h5>
+          <h5 class="titulo-seccion">2. Seleccionar el archivo de las pistas</h5>
           <div class="practica-item">
             <div class="item-texto">
-              <p>Seleccionar el archivo exportado desde KiCad. Mantener identificados por separado los archivos de pistas, etiquetas, perforaciones y contorno.</p>
+              <p>Seleccionar el archivo SVG de las pistas, dando click a "select SVG file".</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Archivo.png" alt="Archivo">
@@ -1537,10 +1537,10 @@
         </div>
 
         <div class="paso-bloque">
-          <h5 class="titulo-seccion">3. Invertir la selección cuando sea necesario</h5>
+          <h5 class="titulo-seccion">3. Invertir las pistas</h5>
           <div class="practica-item">
             <div class="item-texto">
-              <p>Revisar la vista previa del archivo. Si las pistas o etiquetas aparecen invertidas, utilizar la opción de Invert indicada en Mods. Comprobar nuevamente la vista previa antes de continuar.</p>
+              <p>Si las pistas estan invertidas dar click en la opcion "invert".</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Invertir.png" alt="Invertir">
@@ -1550,10 +1550,10 @@
         </div>
 
         <div class="paso-bloque">
-          <h5 class="titulo-seccion">4. Seleccionar el tipo de cortador</h5>
+          <h5 class="titulo-seccion">4. Seleccionar el cortador</h5>
           <div class="practica-item">
             <div class="item-texto">
-              <p>Seleccionar el tipo de cortador correspondiente. Revisar los parámetros mostrados por Mods. Comparar el resultado de la vista previa con el diseño original.</p>
+              <p>Seleccionar el cortador con el que se harán las pistas, en este caso seleccionaremos "1/64 flat".</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Cortador.png" alt="Cortador">
@@ -1563,21 +1563,37 @@
         </div>
 
         <div class="paso-bloque">
-          <h5 class="titulo-seccion">5. Configuración de origen y guardar</h5>
+          <h5 class="titulo-seccion">5. Calcular las pistas.</h5>
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Para saber como quedaria nuestro corte damos click en la opcion "calculate" y de esa manera sabremos como quedarian nuestras pistas y si tenemos que corregir o modificar algo.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica3_Mods/Cortador.png" alt="Cortador">
+              <figcaption>Tipo de cortador</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">6. Configurar el origen</h5>
 
           <div class="practica-item">
             <div class="item-texto">
-              <p>Configurar el origen del archivo. Comprobar que la posición del diseño coincida con la orientación esperada.</p>
+              <p>Configurar el origen de donde queremos que nuestra herramienta empiece al momento de cortar, en nuestro caso en x, y, z sera en 0.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Origen.png" alt="Origen">
               <figcaption>Configuración de origen</figcaption>
             </figure>
           </div>
-
+          
+          <div class="paso-bloque">
+          <h5 class="titulo-seccion">7. Guardar el archivo</h5>
+          
           <div class="practica-item">
             <div class="item-texto">
-              <p>Guardar los archivos.</p>
+              <p>Salvar el archivo para el corte.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
@@ -1585,6 +1601,93 @@
             </figure>
           </div>
         </div>
+
+          <div class="paso-bloque">
+          <h5 class="titulo-seccion">8. Seleccionar el archivo del trazado</h5>
+          
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Seleccionar el archivo SVG del trazado.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+              <figcaption>Guardado del archivo</figcaption>
+            </figure>
+          </div>
+        </div>
+
+           <div class="paso-bloque">
+          <h5 class="titulo-seccion">9. Invertir trazado</h5>
+          
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>De ser necesario invertir el trazado dando click en "invert".</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+              <figcaption>Guardado del archivo</figcaption>
+            </figure>
+          </div>
+        </div>
+
+          <div class="paso-bloque">
+          <h5 class="titulo-seccion">10. Seleccionar el cortador del trazado</h5>
+          
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Seleccionar el cortador que se va a necesitar para el trazado, en este caso sera "1/32 cutout".</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+              <figcaption>Guardado del archivo</figcaption>
+            </figure>
+          </div>
+        </div>
+
+          <div class="paso-bloque">
+          <h5 class="titulo-seccion">11. Calcular el trazado</h5>
+          
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Para saber como quedaria nuestro trazado damos click en "calculate" para que nos muestre como quedaria y saber si necesitamos haver correcciones o modificaciones.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+              <figcaption>Guardado del archivo</figcaption>
+            </figure>
+          </div>
+        </div>
+
+          <div class="paso-bloque">
+          <h5 class="titulo-seccion">12. Configurar el origen</h5>
+          
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Configurar el origen de la herramienta que vamos a utilizar para el trazado.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+              <figcaption>Guardado del archivo</figcaption>
+            </figure>
+          </div>
+        </div>
+
+          <div class="paso-bloque">
+          <h5 class="titulo-seccion">13. Guardar el archivo</h5>
+          
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Guardar el archivo del trazado una vez todo este configurado como queremos.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica3_Mods/Guardar.png" alt="Guardar">
+              <figcaption>Guardado del archivo</figcaption>
+            </figure>
+          </div>
+        </div>
+
+
+
 
       </div>
 
