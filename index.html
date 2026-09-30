@@ -1507,18 +1507,51 @@
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica2_Placa/Nuevo_Placa.png" alt="Distribucion de componentes">
-              <figcaption>Distribución  y ruteo de los componentes en el editor de placas</figcaption>
+              <figcaption>Distribución de los componentes</figcaption>
             </figure>
           </div>
 
           <div class="practica-item">
             <div class="item-texto">
-              <p>Posteriormente se procede a rutear las pistas, uniendo cada componente segun las conexiones definidas en el esquematico. Es importante revisar el ancho de pista y evitar cruces entre las mismas para que el diseño quede funcional, 
-                para revisar o cambiar el ancho de psitas se puede editar en el boton de la siguiente imagen.</p>
+              <p>Posteriormente se procede a rutear las pistas, uniendo cada componente segun las conexiones definidas en el esquematico. Es importante revisar el ancho de pista y evitar cruces entre las mismas para que el diseño quede funcional.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica2_Placa/Ruteo.png" alt="Ruteo de pistas">
+              <figcaption>Ruteo de las pistas en el editor de placas</figcaption>
+            </figure>
+          </div>
+
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Para revisar o cambiar el ancho de las pistas se puede editar desde el boton indicado en la siguiente imagen, donde se define el grosor que tendran las pistas al momento de fabricarlas.</p>
             </div>
             <figure class="item-imagen">
               <img src="Fotos_Practica2_Placa/Ancho_pista.png" alt="Ancho de pistas">
-              <figcaption>Ruteo de las pistas en el editor de placas</figcaption>
+              <figcaption>Configuración del ancho de pistas</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="paso-bloque">
+          <h5 class="titulo-seccion">8. Definir el contorno de la placa</h5>
+
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Una vez terminado el ruteo de las pistas, se procede a definir el contorno de la placa en la capa de "Edge Cuts", que es la que utiliza la cortadora para saber por dónde debe hacer el corte final. Se traza un rectángulo alrededor de todos los componentes dejando un pequeño margen.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica2_Placa/Contorno.png" alt="Contorno de la placa">
+              <figcaption>Definición del contorno en la capa Edge Cuts</figcaption>
+            </figure>
+          </div>
+
+          <div class="practica-item">
+            <div class="item-texto">
+              <p>Finalmente se ejecuta una última revisión con el DRC para confirmar que no existan errores ni pistas sin conectar. Si todo está correcto, el diseño queda listo para exportar los archivos SVG que se usarán en la cortadora.</p>
+            </div>
+            <figure class="item-imagen">
+              <img src="Fotos_Practica2_Placa/Revision_Final.png" alt="Revision final">
+              <figcaption>Revisión final del diseño</figcaption>
             </figure>
           </div>
         </div>
