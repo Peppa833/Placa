@@ -29,7 +29,6 @@
       position: relative;
     }
 
-    /* Fondo con gradientes radiales sutiles */
     body::before {
       content: "";
       position: fixed;
@@ -47,7 +46,6 @@
       z-index: 1;
     }
 
-    /* Contenedor principal */
     .container {
       width: 100%;
       max-width: 1280px;
@@ -193,7 +191,6 @@
       line-height: 1.7;
     }
 
-    /* Etiqueta de sección */
     .section-label {
       display: inline-flex;
       align-items: center;
@@ -396,7 +393,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.25rem;
-      margin-top: 2rem;
+      margin-top: 1.25rem;
     }
 
     .practica-btn {
@@ -470,6 +467,78 @@
       letter-spacing: 0.02em;
     }
 
+    /* Badge de corte */
+    .practica-btn .practica-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.65rem;
+      border-radius: 100px;
+      z-index: 2;
+    }
+
+    .practica-btn .practica-badge.corte-1 {
+      background: linear-gradient(135deg, #a5b4fc, #818cf8);
+      color: #0a0a0f;
+      box-shadow: 0 4px 12px rgba(129, 140, 248, 0.35);
+    }
+
+    .practica-btn .practica-badge.corte-2 {
+      background: linear-gradient(135deg, #f0abfc, #ec4899);
+      color: #0a0a0f;
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.35);
+    }
+
+    /* Separador / título de corte */
+    .corte-titulo {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: 2.5rem;
+      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #e8e8f0;
+      letter-spacing: 0.02em;
+    }
+
+    .corte-titulo:first-of-type {
+      margin-top: 1.5rem;
+    }
+
+    .corte-titulo .corte-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #0a0a0f;
+      flex-shrink: 0;
+    }
+
+    .corte-titulo .corte-num.c1 {
+      background: linear-gradient(135deg, #a5b4fc, #818cf8);
+      box-shadow: 0 0 16px rgba(129, 140, 248, 0.5);
+    }
+
+    .corte-titulo .corte-num.c2 {
+      background: linear-gradient(135deg, #f0abfc, #ec4899);
+      box-shadow: 0 0 16px rgba(236, 72, 153, 0.5);
+    }
+
+    .corte-titulo .corte-linea {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.12), transparent);
+    }
+
     /* DETALLE PRÁCTICA */
     .detalle-practica {
       display: none;
@@ -481,28 +550,32 @@
       animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    /* BOTÓN VOLVER — sin flecha */
     .btn-volver {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #a1a1aa;
+      background: linear-gradient(135deg, rgba(165, 180, 252, 0.15), rgba(240, 171, 252, 0.1));
+      border: 1px solid rgba(165, 180, 252, 0.4);
+      color: #e8e8f0;
       font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 500;
-      padding: 0.55rem 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.7rem 1.3rem;
       border-radius: 100px;
       cursor: pointer;
       transition: all 0.25s ease;
       margin-bottom: 2rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       letter-spacing: 0.02em;
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15);
     }
 
     .btn-volver:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: linear-gradient(135deg, rgba(165, 180, 252, 0.3), rgba(240, 171, 252, 0.2));
+      border-color: rgba(165, 180, 252, 0.7);
       color: #fff;
-      border-color: rgba(165, 180, 252, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
     }
 
     .detalle-practica h2 {
@@ -602,12 +675,19 @@
     }
 
     .item-imagen figcaption {
-      margin-top: 0.6rem;
+      display: inline-block;
+      margin-top: 0.75rem;
       font-size: 0.78rem;
-      color: #71717a;
-      text-align: center;
+      color: #c7d2fe;
       letter-spacing: 0.03em;
-      font-style: italic;
+      font-style: normal;
+      font-weight: 500;
+      background: rgba(165, 180, 252, 0.1);
+      border: 1px solid rgba(165, 180, 252, 0.2);
+      padding: 0.4rem 0.85rem;
+      border-radius: 100px;
+      width: 100%;
+      text-align: center;
     }
 
     @media (min-width: 820px) {
@@ -780,8 +860,8 @@
       }
 
       .btn-volver {
-        font-size: 0.78rem;
-        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        padding: 0.6rem 1.1rem;
         margin-bottom: 1.5rem;
       }
 
@@ -802,6 +882,11 @@
 
       .item-texto p {
         font-size: 0.88rem;
+      }
+
+      .item-imagen figcaption {
+        font-size: 0.72rem;
+        padding: 0.35rem 0.7rem;
       }
 
       .btn-inicio {
@@ -851,7 +936,7 @@
   <div class="container">
     <header class="header">
       <h1>Producción Electrónica</h1>
-      <p class="subtitle">Ciclo 2025 · Ibero Puebla</p>
+      <p class="subtitle">Ciclo 2026 · Ibero Puebla</p>
     </header>
 
     <div class="tabs">
@@ -927,7 +1012,7 @@
 
         <div class="footer-integrantes">
           <strong>Universidad Iberoamericana Puebla</strong><br>
-          Producción Electrónica · Ciclo 2025
+          Producción Electrónica · Ciclo 2026
         </div>
       </div>
     </div>
@@ -972,8 +1057,17 @@
           <span class="section-label">Documentación</span>
           <h2>Prácticas del curso</h2>
           <p style="margin-bottom:0.5rem;">Selecciona una práctica para ver el proceso completo.</p>
+
+          <!-- ============ PRIMER CORTE ============ -->
+          <div class="corte-titulo">
+            <span class="corte-num c1">1</span>
+            <span>Primer corte</span>
+            <span class="corte-linea"></span>
+          </div>
+
           <div class="practicas-grid">
             <button class="practica-btn" onclick="mostrarPractica('practica1')">
+              <span class="practica-badge corte-1">1er Corte</span>
               <div class="practica-img">
                 <img src="Fotos_Portadas/Kicad_Inicio.png" alt="KiCad">
               </div>
@@ -983,6 +1077,7 @@
               </div>
             </button>
             <button class="practica-btn" onclick="mostrarPractica('practica2')">
+              <span class="practica-badge corte-1">1er Corte</span>
               <div class="practica-img">
                 <img src="Fotos_Portadas/Primera_placa.png" alt="Práctica 2">
               </div>
@@ -992,6 +1087,7 @@
               </div>
             </button>
             <button class="practica-btn" onclick="mostrarPractica('practica3')">
+              <span class="practica-badge corte-1">1er Corte</span>
               <div class="practica-img">
                 <img src="Fotos_Portadas/MODS.png" alt="Mods">
               </div>
@@ -1001,6 +1097,7 @@
               </div>
             </button>
             <button class="practica-btn" onclick="mostrarPractica('practica4')">
+              <span class="practica-badge corte-1">1er Corte</span>
               <div class="practica-img">
                 <img src="Fotos_Portadas/Cortadora.jpg" alt="Monofab">
               </div>
@@ -1010,13 +1107,33 @@
               </div>
             </button>
           </div>
+
+          <!-- ============ SEGUNDO CORTE ============ -->
+          <div class="corte-titulo">
+            <span class="corte-num c2">2</span>
+            <span>Segundo corte</span>
+            <span class="corte-linea"></span>
+          </div>
+
+          <div class="practicas-grid">
+            <button class="practica-btn" onclick="mostrarPractica('practica5')">
+              <span class="practica-badge corte-2">2º Corte</span>
+              <div class="practica-img">
+                <img src="Fotos_Portadas/Segundo_Corte.png" alt="Segundo corte">
+              </div>
+              <div class="practica-info">
+                <span class="practica-titulo">Multisim</span>
+                <span class="practica-sub">Uso de Multisim</span>
+              </div>
+            </button>
+          </div>
         </div>
 
         <!-- PRÁCTICA 1 -->
         <div id="practica1" class="detalle-practica">
-          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
           <h2>Instalación de KiCad para la fabricación de la PCB</h2>
-          <p class="subtitulo">Documentación de la instalación de KiCad.</p>
+          <p class="subtitulo">Documentación de la instalación de KiCad · Primer corte.</p>
 
           <div class="paso-bloque">
             <h5 class="titulo-seccion">1. Descargar el programa</h5>
@@ -1065,9 +1182,9 @@
 
         <!-- PRÁCTICA 2 -->
         <div id="practica2" class="detalle-practica">
-          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
           <h2>Fabricación de la primera placa</h2>
-          <p class="subtitulo">Documentación de fabricación.</p>
+          <p class="subtitulo">Documentación de fabricación · Primer corte.</p>
 
           <div class="paso-bloque">
             <h5 class="titulo-seccion">1. Crear un nuevo proyecto</h5>
@@ -1257,9 +1374,9 @@
 
         <!-- PRÁCTICA 3 -->
         <div id="practica3" class="detalle-practica">
-          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
           <h2>Mods</h2>
-          <p class="subtitulo">Documentación del uso de Mods.</p>
+          <p class="subtitulo">Documentación del uso de Mods · Primer corte.</p>
 
           <div class="paso-bloque">
             <h5 class="titulo-seccion">1. Entrar a la página de Mods</h5>
@@ -1434,9 +1551,9 @@
 
         <!-- PRÁCTICA 4 -->
         <div id="practica4" class="detalle-practica">
-          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
           <h2>Monofab</h2>
-          <p class="subtitulo">Documentación del uso de la Monofab.</p>
+          <p class="subtitulo">Documentación del uso de la Monofab · Primer corte.</p>
 
           <div class="paso-bloque">
             <h5 class="titulo-seccion">1. Preparar la MonoFab</h5>
@@ -1520,11 +1637,96 @@
           </div>
         </div>
 
+        <!-- PRÁCTICA 5 - SEGUNDO CORTE -->
+        <div id="practica5" class="detalle-practica">
+          <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
+          <h2>Segundo corte</h2>
+          <p class="subtitulo">Fabricación de la segunda placa · Segundo corte.</p>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">1. Diseño del esquemático</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Para el segundo corte se diseñó un nuevo circuito en el editor de esquemas de KiCad, reutilizando los componentes de la librería FabLab aprendidos en la práctica anterior. Se verificó que todos los componentes tuvieran huella asignada.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica5_SegundoCorte/Esquematico_Segundo.png" alt="Esquemático segundo corte">
+                <figcaption>Esquemático del segundo circuito</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">2. Verificación con DRC</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Se ejecutó el DRC (Design Rule Check) para verificar que el diseño cumpliera con las reglas y no presentara errores antes de pasar al editor de placas.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica5_SegundoCorte/DRC_Segundo.png" alt="DRC segundo corte">
+                <figcaption>Verificación de reglas de diseño</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">3. Ruteo y contorno de la placa</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>En el editor de placas se distribuyeron los componentes y se ruteraron las pistas siguiendo las conexiones del esquemático. Finalmente, se dibujó el contorno en la capa Edge.Cuts.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica5_SegundoCorte/Ruteo_Segundo.png" alt="Ruteo segundo corte">
+                <figcaption>Ruteo y contorno de la placa</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">4. Preparación de archivos en Mods</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Se exportaron los archivos SVG de pistas y contorno desde KiCad y se procesaron en Mods con la configuración "mill 2D PCB", usando los cortadores 1/64 flat para pistas y 1/32 cutout para el contorno.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica5_SegundoCorte/Mods_Segundo.png" alt="Mods segundo corte">
+                <figcaption>Preparación de archivos en Mods</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">5. Corte en la MonoFab</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Se realizó el corte en la MonoFab SRM-20: primero las perforaciones con fresa de 0.8 mm, después las pistas con fresa de 0.4 mm, y por último el corte perimetral con fresa de 2.00 mm. En cada cambio de fresa se recalibró el eje Z.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica5_SegundoCorte/Corte_Segundo.png" alt="Corte segundo">
+                <figcaption>Corte en la MonoFab</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">6. Resultado final</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Se revisó el resultado final del segundo corte: pistas continuas, perforaciones limpias y contorno bien definido. La placa quedó lista para soldar los componentes.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica5_SegundoCorte/Resultado_Segundo.png" alt="Resultado segundo corte">
+                <figcaption>Placa terminada del segundo corte</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <button id="btnInicio" class="btn-inicio" onclick="irArriba()">↑ Inicio</button>
+  <button id="btnInicio" class="btn-inicio" onclick="irArriba()">Inicio</button>
 
   <div id="lightbox" class="lightbox" onclick="cerrarLightbox(event)">
     <button class="lightbox-cerrar" onclick="cerrarLightbox(event)" aria-label="Cerrar">×</button>
