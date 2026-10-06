@@ -7,490 +7,648 @@
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html, body {
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0a0f;
+      color: #e8e8f0;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      padding: 20px 20px 50px;
-      background: #0f0f1a;
-      background-image:
-        radial-gradient(circle at 15% 20%, rgba(142,68,173,0.18), transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(64,120,255,0.15), transparent 45%),
-        radial-gradient(circle at 50% 50%, rgba(142,68,173,0.06), transparent 70%);
-      color: #e6e6f0;
+      padding: 3rem 1.5rem 6rem;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
     }
 
-    h1 {
-      font-size: 3.2rem;
-      color: #ffffff;
+    /* Fondo con gradientes radiales sutiles */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
+        radial-gradient(ellipse 60% 50% at 80% 100%, rgba(236, 72, 153, 0.08), transparent),
+        radial-gradient(ellipse 60% 50% at 20% 100%, rgba(34, 211, 238, 0.08), transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Contenedor principal */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
       text-align: center;
-      margin-bottom: 5px;
-      text-shadow: 0 0 25px rgba(142,68,173,0.55), 0 0 60px rgba(64,120,255,0.25);
-      letter-spacing: 1px;
-      animation: aparecerArriba 0.8s ease-out;
-      background: linear-gradient(135deg, #ffffff 30%, #c5a4ff 100%);
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #f0abfc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      margin-bottom: 0.75rem;
     }
 
-    @keyframes aparecerArriba {
-      from { opacity: 0; transform: translateY(-25px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .header .subtitle {
+      font-size: 0.9rem;
+      color: #71717a;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
 
+    .header .subtitle::before,
+    .header .subtitle::after {
+      content: "";
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: #3f3f46;
+      vertical-align: middle;
+      margin: 0 0.75rem;
+    }
+
+    /* TABS */
     .tabs {
       display: flex;
-      gap: 12px;
-      margin-top: 30px;
-      animation: aparecerArriba 0.8s ease-out 0.15s both;
       flex-wrap: wrap;
+      gap: 0.5rem;
       justify-content: center;
+      margin-bottom: 3rem;
+      padding: 0.4rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 100px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      backdrop-filter: blur(12px);
     }
 
     .tab-btn {
-      border: 1px solid rgba(142,68,173,0.35);
-      background: rgba(30,30,50,0.7);
-      color: #c5c5d8;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 12px 28px;
-      border-radius: 30px;
+      background: transparent;
+      border: none;
+      color: #a1a1aa;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 0.65rem 1.4rem;
+      border-radius: 100px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-      backdrop-filter: blur(8px);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
     }
 
     .tab-btn:hover {
-      transform: translateY(-3px);
-      background: rgba(142,68,173,0.18);
-      border-color: #8e44ad;
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(142,68,173,0.45);
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .tab-btn.activa {
-      background: linear-gradient(135deg, #8e44ad, #6f3588);
-      color: #ffffff;
-      border-color: #a55fc4;
-      box-shadow: 0 6px 22px rgba(142,68,173,0.6);
+      background: #fff;
+      color: #0a0a0f;
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
     }
 
+    /* SECCIONES */
     .seccion {
       display: none;
-      margin-top: 35px;
       width: 100%;
-      justify-content: center;
     }
 
     .seccion.activa {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      width: 100%;
-      max-width: 900px;
-      animation: aparecerArriba 0.5s ease-out both;
+      display: block;
+      animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    #objetivos.activa {
-      max-width: 1450px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    #documentacion.activa {
-      max-width: 1200px;
-    }
-
-    #integrantes.activa {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      max-width: 1000px;
-    }
-
-    /* =====================================================
-       SECCIÓN INTEGRANTES
-       ===================================================== */
-    .integrantes-wrap {
-      width: 100%;
-      background: linear-gradient(145deg, #1a1a2e, #16162a);
+    /* CARDS */
+    .card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       border-radius: 24px;
-      padding: 50px 60px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(142,68,173,0.18);
+      padding: 2.5rem;
+      backdrop-filter: blur(20px);
       position: relative;
       overflow: hidden;
-      animation: aparecerArriba 0.5s ease-out both;
     }
 
-    .integrantes-wrap::before {
+    .card::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #8e44ad, #4078ff, transparent);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(165, 180, 252, 0.5), transparent);
     }
 
-    .integrantes-header {
-      text-align: center;
-      margin-bottom: 36px;
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      color: #fff;
     }
 
-    .integrantes-header h3 {
-      margin: 0 0 14px;
-      color: #ffffff;
-      font-size: 1.9rem;
-      position: relative;
-      padding-bottom: 12px;
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      color: #fff;
     }
 
-    .integrantes-header h3::after {
-      content: "";
-      display: block;
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(90deg, #8e44ad, #4078ff);
-      border-radius: 4px;
-      margin: 14px auto 0;
-      box-shadow: 0 0 12px rgba(142,68,173,0.6);
-    }
-
-    .integrantes-header p {
-      margin: 0;
-      color: #b8b8cc;
-      font-size: 1.05rem;
+    .card > p {
+      color: #a1a1aa;
+      font-size: 0.98rem;
       line-height: 1.7;
-      max-width: 620px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
+    /* Etiqueta de sección */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #a5b4fc;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: #a5b4fc;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #a5b4fc;
+    }
+
+    /* INTEGRANTES */
     .integrantes-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      margin-top: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
 
-    .tarjeta {
-      position: relative;
+    .integrante-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-      border: 1px solid rgba(142,68,173,0.25);
-      opacity: 0;
-      transform: translateY(30px) scale(0.95);
-      animation: entrarTarjeta 0.6s ease-out forwards;
-      background: linear-gradient(145deg, #1f1f38, #191932);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .tarjeta:nth-child(1) { animation-delay: 0.2s; }
-    .tarjeta:nth-child(2) { animation-delay: 0.4s; }
-
-    @keyframes entrarTarjeta {
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .tarjeta:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 22px 45px rgba(142,68,173,0.5);
-      border-color: #a55fc4;
-    }
-
-    .tarjeta .tarjeta-foto {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
+    }
+
+    .integrante-card:hover {
+      border-color: rgba(165, 180, 252, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(99, 102, 241, 0.1);
+    }
+
+    .integrante-card .foto {
       width: 100%;
-      aspect-ratio: 4 / 4.5;
+      aspect-ratio: 4 / 4.2;
       overflow: hidden;
+      background: #1a1a24;
+      position: relative;
     }
 
-    .tarjeta .tarjeta-foto img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .tarjeta:hover .tarjeta-foto img {
-      transform: scale(1.08);
-    }
-
-    .tarjeta .tarjeta-foto::after {
+    .integrante-card .foto::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(15,15,26,0.85) 0%, rgba(15,15,26,0.1) 55%, transparent 100%);
+      background: linear-gradient(to top, rgba(10, 10, 15, 0.9) 0%, transparent 50%);
       pointer-events: none;
     }
 
-    .tarjeta .tarjeta-numero {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #8e44ad, #6f3588);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 18px rgba(142,68,173,0.65);
-      border: 1px solid rgba(197,164,255,0.4);
-      z-index: 2;
-    }
-
-    .tarjeta .tarjeta-info {
-      padding: 22px 22px 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-align: left;
-      position: relative;
-    }
-
-    .tarjeta .tarjeta-nombre {
-      margin: 0;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.3px;
-      transition: color 0.3s ease;
-    }
-
-    .tarjeta:hover .tarjeta-nombre {
-      color: #c5a4ff;
-    }
-
-    .tarjeta .tarjeta-datos {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .tarjeta .tarjeta-dato {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #b8b8cc;
-      font-size: 0.9rem;
-      font-weight: 500;
-      word-break: break-all;
-    }
-
-    .tarjeta .tarjeta-dato svg {
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-      color: #c5a4ff;
-    }
-
-    .tarjeta .tarjeta-dato a {
-      color: #c5a4ff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .tarjeta .tarjeta-dato a:hover {
-      color: #ffffff;
-      text-decoration: underline;
-    }
-
-    .integrantes-footer {
-      margin-top: 40px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(142,68,173,0.2);
-      text-align: center;
-      color: #9a9ab0;
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    .integrantes-footer strong {
-      color: #c5a4ff;
-      font-weight: 600;
-    }
-
-    /* =====================================================
-       DOCUMENTACIÓN
-       ===================================================== */
-    .doc-tarjeta {
-      background: linear-gradient(145deg, #1a1a2e, #16162a);
-      border-radius: 24px;
-      padding: 50px 60px;
+    .integrante-card .foto img {
       width: 100%;
-      max-width: 1400px;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: grayscale(20%) contrast(105%);
+    }
+
+    .integrante-card:hover .foto img {
+      transform: scale(1.05);
+      filter: grayscale(0%) contrast(105%);
+    }
+
+    .integrante-card .info {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .integrante-card .info h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+
+    .integrante-card .info .dato {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: #a1a1aa;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .integrante-card .info .dato:hover {
+      color: #e8e8f0;
+    }
+
+    .integrante-card .info .dato svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      color: #a5b4fc;
+    }
+
+    .integrante-card .info .dato a {
+      color: #a1a1aa;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .integrante-card .info .dato a:hover {
+      color: #a5b4fc;
+    }
+
+    .footer-integrantes {
+      margin-top: 2.5rem;
       text-align: center;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(142,68,173,0.18);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 0.82rem;
+      color: #71717a;
+      line-height: 1.7;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-integrantes strong {
+      color: #a5b4fc;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* OBJETIVOS */
+    .objetivos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .objetivo-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
     }
 
-    .doc-tarjeta::before {
+    .objetivo-item::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #8e44ad, #4078ff, transparent);
-    }
-
-    .doc-tarjeta:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(142,68,173,0.35), inset 0 0 0 1px rgba(142,68,173,0.35);
-    }
-
-    .doc-tarjeta h3 {
-      margin: 0 0 16px;
-      color: #ffffff;
-      font-size: 1.9rem;
-      position: relative;
-      padding-bottom: 12px;
-    }
-
-    .doc-tarjeta h3::after {
-      content: "";
-      display: block;
-      width: 70px;
-      height: 4px;
-      background: linear-gradient(90deg, #8e44ad, #4078ff);
-      border-radius: 4px;
-      margin: 14px auto 0;
-      box-shadow: 0 0 12px rgba(142,68,173,0.6);
-    }
-
-    .doc-tarjeta p {
-      margin: 0;
-      color: #b8b8cc;
-      font-size: 1.1rem;
-      font-weight: 400;
-      line-height: 1.7;
-    }
-
-    .objetivos-especificos {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-      margin-top: 30px;
-      text-align: left;
-    }
-
-    @media (max-width: 900px) {
-      .objetivos-especificos {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .objetivos-especificos {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .objetivo-item {
-      background: linear-gradient(145deg, #1f1f38, #191932);
-      border-radius: 16px;
-      padding: 18px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      border: 1px solid rgba(142,68,173,0.18);
+      width: 3px;
+      height: 0;
+      background: linear-gradient(180deg, #a5b4fc, #f0abfc);
+      transition: height 0.3s ease;
     }
 
     .objetivo-item:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 30px rgba(142,68,173,0.4);
-      border-color: #a55fc4;
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(165, 180, 252, 0.25);
+      transform: translateY(-3px);
     }
 
-    .objetivo-item p {
-      font-size: 0.9rem;
-      color: #b8b8cc;
-      font-weight: 400;
-      margin: 0 0 14px;
-      flex-grow: 1;
-      line-height: 1.5;
+    .objetivo-item:hover::before {
+      height: 100%;
     }
 
     .objetivo-item h4 {
-      font-size: 1.05rem;
-      color: #c5a4ff;
-      font-weight: 700;
-      margin: 0 0 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #a5b4fc;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .objetivo-item p {
+      font-size: 0.88rem;
+      color: #a1a1aa;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
     }
 
     .objetivo-item img {
       width: 100%;
-      height: 140px;
+      height: 130px;
       object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      border-radius: 10px;
+      background: #1a1a24;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .doc-tarjeta a {
-      display: inline-block;
-      margin-top: 24px;
-      background: linear-gradient(135deg, #8e44ad, #6f3588);
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 30px;
+    /* PRÁCTICAS */
+    .practicas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .practica-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      font-family: inherit;
+      color: inherit;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .practica-btn:hover {
+      border-color: rgba(165, 180, 252, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(99, 102, 241, 0.1);
+    }
+
+    .practica-btn .practica-img {
+      width: 100%;
+      aspect-ratio: 1113 / 500;
+      overflow: hidden;
+      background: #1a1a24;
+      position: relative;
+    }
+
+    .practica-btn .practica-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10, 10, 15, 0.85) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .practica-btn .practica-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .practica-btn:hover .practica-img img {
+      transform: scale(1.06);
+    }
+
+    .practica-btn .practica-info {
+      padding: 1.1rem 1.25rem 1.25rem;
+      position: relative;
+    }
+
+    .practica-btn .practica-titulo {
+      display: block;
+      font-size: 0.98rem;
       font-weight: 600;
-      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .practica-btn .practica-sub {
+      display: block;
+      font-size: 0.78rem;
+      color: #71717a;
+      letter-spacing: 0.02em;
+    }
+
+    /* DETALLE PRÁCTICA */
+    .detalle-practica {
+      display: none;
+      width: 100%;
+    }
+
+    .detalle-practica.activo {
+      display: block;
+      animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-volver {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #a1a1aa;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.55rem 1.1rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      margin-bottom: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-volver:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border-color: rgba(165, 180, 252, 0.4);
+    }
+
+    .detalle-practica h2 {
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .detalle-practica .subtitulo {
+      font-size: 0.9rem;
+      color: #71717a;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .titulo-seccion {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      padding: 0.5rem 1rem 0.5rem 0.75rem;
+      background: linear-gradient(90deg, rgba(165, 180, 252, 0.12), transparent);
+      border-left: 3px solid #a5b4fc;
+      border-radius: 0 8px 8px 0;
+      letter-spacing: -0.01em;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    .paso-bloque {
+      margin-bottom: 3rem;
+    }
+
+    .practica-item {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .practica-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .item-texto p {
+      color: #a1a1aa;
+      font-size: 0.94rem;
+      line-height: 1.75;
+    }
+
+    .item-texto p + p {
+      margin-top: 0.5rem;
+    }
+
+    .item-texto p a {
+      color: #a5b4fc;
+      font-weight: 500;
       text-decoration: none;
-      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 6px 18px rgba(142,68,173,0.4);
+      border-bottom: 1px solid rgba(165, 180, 252, 0.4);
+      transition: all 0.2s ease;
     }
 
-    .doc-tarjeta a:hover {
-      background: linear-gradient(135deg, #a55fc4, #8e44ad);
-      transform: scale(1.05);
-      box-shadow: 0 10px 26px rgba(142,68,173,0.6);
+    .item-texto p a:hover {
+      color: #f0abfc;
+      border-bottom-color: #f0abfc;
     }
 
+    .item-imagen {
+      margin: 0;
+    }
+
+    .item-imagen img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: zoom-in;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #1a1a24;
+    }
+
+    .item-imagen img:hover {
+      border-color: rgba(165, 180, 252, 0.5);
+      box-shadow: 0 0 40px rgba(99, 102, 241, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .item-imagen figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: #71717a;
+      text-align: center;
+      letter-spacing: 0.03em;
+      font-style: italic;
+    }
+
+    @media (min-width: 820px) {
+      .practica-item {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 2.5rem;
+      }
+      .item-texto {
+        flex: 1 1 50%;
+        min-width: 0;
+        padding-top: 0.25rem;
+      }
+      .item-imagen {
+        flex: 1 1 50%;
+        min-width: 0;
+      }
+    }
+
+    /* BOTÓN INICIO */
     .btn-inicio {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: linear-gradient(135deg, #8e44ad, #6f3588);
-      color: #fff;
-      border: 1px solid rgba(197,164,255,0.3);
-      padding: 14px 28px;
-      border-radius: 30px;
-      font-family: 'Poppins', sans-serif;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      color: #0a0a0f;
+      border: none;
+      padding: 0.8rem 1.4rem;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 0.82rem;
       font-weight: 600;
-      font-size: 0.95rem;
       cursor: pointer;
-      box-shadow: 0 8px 24px rgba(142,68,173,0.5);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
       opacity: 0;
       pointer-events: none;
-      transform: translateY(15px);
-      transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+      transform: translateY(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 100;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(12px);
     }
 
     .btn-inicio.visible {
@@ -500,329 +658,24 @@
     }
 
     .btn-inicio:hover {
-      background: linear-gradient(135deg, #a55fc4, #8e44ad);
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px rgba(142,68,173,0.7);
+      background: #a5b4fc;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(165, 180, 252, 0.4);
     }
 
-    .practicas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      margin-top: 35px;
-    }
-
-    .practica-btn {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: linear-gradient(145deg, #1f1f38, #191932);
-      border: 1px solid rgba(142,68,173,0.25);
-      border-radius: 20px;
-      padding: 0;
-      text-align: center;
-      color: #e6e6f0;
-      font-weight: 600;
-      font-size: 1rem;
-      font-family: 'Poppins', sans-serif;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.45);
-      overflow: hidden;
-    }
-
-    .practica-btn::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #8e44ad, #4078ff, transparent);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-
-    .practica-btn:hover::before {
-      opacity: 1;
-    }
-
-    .practica-btn .practica-img-wrap {
-      width: 100%;
-      aspect-ratio: 1113 / 500;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .practica-btn .practica-img-wrap::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(15,15,26,0.85) 0%, transparent 55%);
-      pointer-events: none;
-    }
-
-    .practica-btn .practica-img-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-      display: block;
-    }
-
-    .practica-btn .practica-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 18px 16px 22px;
-      width: 100%;
-      position: relative;
-    }
-
-    .practica-btn .practica-titulo {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 6px;
-      letter-spacing: 0.3px;
-      transition: color 0.3s ease;
-    }
-
-    .practica-btn .practica-sub {
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: #9a9ab0;
-      transition: color 0.3s ease;
-    }
-
-    .practica-btn:hover {
-      transform: translateY(-8px);
-      background: linear-gradient(145deg, #262645, #1e1e3c);
-      border-color: #a55fc4;
-      box-shadow: 0 18px 40px rgba(142,68,173,0.5);
-    }
-
-    .practica-btn:hover .practica-img-wrap img {
-      transform: scale(1.08);
-    }
-
-    .practica-btn:hover .practica-titulo {
-      color: #c5a4ff;
-    }
-
-    .practica-btn:hover .practica-sub {
-      color: #b8b8cc;
-    }
-
-    .practica-btn.activa {
-      background: linear-gradient(135deg, #8e44ad, #6f3588);
-      border-color: #a55fc4;
-    }
-
-    .lista-practicas {
-      display: block;
-      width: 100%;
-    }
-
-    .lista-practicas.oculto {
-      display: none;
-    }
-
-    .detalle-practica {
-      display: none;
-      width: 100%;
-      text-align: left;
-      margin-top: 10px;
-    }
-
-    .detalle-practica.activo {
-      display: block;
-      animation: aparecerArriba 0.4s ease-out both;
-    }
-
-    .btn-volver {
-      background: linear-gradient(135deg, #8e44ad, #6f3588);
-      border: 1px solid rgba(197,164,255,0.3);
-      color: #ffffff;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      cursor: pointer;
-      padding: 12px 26px;
-      border-radius: 30px;
-      margin-bottom: 26px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 6px 18px rgba(142,68,173,0.45);
-      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .btn-volver:hover {
-      background: linear-gradient(135deg, #a55fc4, #8e44ad);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(142,68,173,0.65);
-      text-decoration: none;
-    }
-
-    .detalle-practica h4 {
-      margin: 0 0 14px;
-      color: #ffffff;
-      font-size: 1.7rem;
-      text-shadow: 0 0 20px rgba(142,68,173,0.4);
-    }
-
-    .detalle-practica .subtitulo {
-      margin: 0 0 30px;
-      color: #c5a4ff;
-      font-size: 1.1rem;
-      font-weight: 600;
-      padding-bottom: 22px;
-      border-bottom: 2px solid rgba(142,68,173,0.3);
-    }
-
-    .detalle-practica .titulo-seccion {
-      margin: 0 0 22px;
-      color: #ffffff;
-      font-size: 1.3rem;
-      font-weight: 700;
-      padding: 12px 18px;
-      background: linear-gradient(90deg, rgba(142,68,173,0.25), rgba(64,120,255,0.1));
-      border-left: 4px solid #8e44ad;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .detalle-practica p {
-      margin: 0 0 20px;
-      color: #b8b8cc;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .paso-bloque {
-      margin-bottom: 50px;
-      padding-bottom: 10px;
-    }
-
-    .paso-bloque:last-child {
-      margin-bottom: 0;
-    }
-
-    .practica-item {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 32px;
-      background: linear-gradient(145deg, rgba(31,31,56,0.7), rgba(25,25,50,0.7));
-      padding: 22px;
-      border-radius: 18px;
-      transition: background 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      border: 1px solid rgba(142,68,173,0.15);
-    }
-
-    .practica-item:hover {
-      background: linear-gradient(145deg, rgba(38,38,69,0.95), rgba(30,30,60,0.95));
-      box-shadow: 0 12px 28px rgba(142,68,173,0.3);
-      border-color: rgba(165,95,196,0.5);
-    }
-
-    .practica-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .item-texto {
-      order: 1;
-    }
-
-    .item-texto p {
-      margin: 0;
-      color: #c8c8d8;
-      font-size: 1rem;
-      line-height: 1.75;
-      text-align: left;
-    }
-
-    .item-texto p a {
-      display: inline;
-      background: none;
-      margin-top: 0;
-      padding: 0;
-      border-radius: 0;
-      color: #c5a4ff;
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-color: rgba(197,164,255,0.5);
-    }
-
-    .item-texto p a:hover {
-      background: none;
-      transform: none;
-      color: #ffffff;
-      text-decoration-color: #ffffff;
-    }
-
-    .item-imagen {
-      order: 2;
-      margin: 0;
-    }
-
-    .item-imagen img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 14px;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.55);
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      border: 1px solid rgba(142,68,173,0.2);
-      cursor: zoom-in;
-    }
-
-    .item-imagen img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 14px 32px rgba(142,68,173,0.45);
-    }
-
-    .item-imagen figcaption {
-      margin-top: 10px;
-      text-align: center;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: #c5a4ff;
-      font-style: italic;
-    }
-
-    @media (min-width: 820px) {
-      .practica-item {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 28px;
-      }
-      .item-texto {
-        flex: 1 1 50%;
-        min-width: 0;
-        padding-top: 6px;
-      }
-      .item-imagen {
-        flex: 1 1 50%;
-        min-width: 0;
-      }
-    }
-
+    /* LIGHTBOX */
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(5,5,12,0.94);
+      background: rgba(5, 5, 10, 0.95);
+      backdrop-filter: blur(16px);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 999;
-      padding: 30px;
+      padding: 2rem;
       opacity: 0;
       transition: opacity 0.3s ease;
-      backdrop-filter: blur(8px);
       cursor: zoom-out;
     }
 
@@ -837,352 +690,209 @@
       width: auto;
       height: auto;
       object-fit: contain;
-      border-radius: 14px;
-      box-shadow: 0 0 60px rgba(142,68,173,0.6), 0 0 120px rgba(64,120,255,0.3);
-      border: 1px solid rgba(197,164,255,0.25);
-      animation: zoomIn 0.35s ease-out;
+      border-radius: 12px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 80px rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     @keyframes zoomIn {
-      from { transform: scale(0.85); opacity: 0; }
+      from { transform: scale(0.94); opacity: 0; }
       to   { transform: scale(1); opacity: 1; }
     }
 
     .lightbox-cerrar {
       position: fixed;
-      top: 24px;
-      right: 24px;
-      width: 48px;
-      height: 48px;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #8e44ad, #6f3588);
+      background: rgba(255, 255, 255, 0.1);
       color: #fff;
-      border: 1px solid rgba(197,164,255,0.4);
-      font-size: 1.4rem;
-      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 1.2rem;
+      font-weight: 400;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 24px rgba(142,68,173,0.6);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      transition: all 0.25s ease;
       z-index: 1000;
+      backdrop-filter: blur(12px);
     }
 
     .lightbox-cerrar:hover {
-      transform: scale(1.1) rotate(90deg);
-      background: linear-gradient(135deg, #a55fc4, #8e44ad);
-      box-shadow: 0 12px 32px rgba(142,68,173,0.9);
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05) rotate(90deg);
+      border-color: rgba(165, 180, 252, 0.5);
     }
 
-    /* =====================================================
-       RESPONSIVE PARA CELULAR
-       ===================================================== */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       body {
-        padding: 15px 12px 80px;
+        padding: 2rem 1rem 5rem;
       }
 
-      h1 {
-        font-size: 1.9rem;
-        letter-spacing: 0.5px;
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .header .subtitle::before,
+      .header .subtitle::after {
+        width: 16px;
+        margin: 0 0.4rem;
       }
 
       .tabs {
-        gap: 8px;
-        margin-top: 22px;
+        gap: 0.3rem;
+        padding: 0.35rem;
         width: 100%;
-      }
-
-      .tab-btn {
-        font-size: 0.82rem;
-        padding: 9px 16px;
-        flex: 1 1 calc(50% - 8px);
-        min-width: 0;
-      }
-
-      .seccion.activa {
-        gap: 18px;
-        margin-top: 25px;
-      }
-
-      #objetivos.activa,
-      #documentacion.activa,
-      #integrantes.activa {
         max-width: 100%;
       }
 
-      .integrantes-wrap {
-        padding: 28px 18px;
-        border-radius: 18px;
+      .tab-btn {
+        font-size: 0.78rem;
+        padding: 0.55rem 1rem;
+        flex: 1;
+        text-align: center;
       }
 
-      .integrantes-header h3 {
-        font-size: 1.4rem;
+      .card {
+        padding: 1.75rem 1.25rem;
+        border-radius: 20px;
       }
 
-      .integrantes-header h3::after {
-        width: 50px;
-        height: 3px;
-      }
-
-      .integrantes-header p {
-        font-size: 0.95rem;
+      .card h2 {
+        font-size: 1.3rem;
       }
 
       .integrantes-grid {
         grid-template-columns: 1fr;
-        gap: 22px;
       }
 
-      .tarjeta .tarjeta-nombre {
-        font-size: 1.05rem;
-      }
-
-      .tarjeta .tarjeta-dato {
-        font-size: 0.85rem;
-      }
-
-      .integrantes-footer {
-        font-size: 0.88rem;
-        margin-top: 28px;
-        padding-top: 22px;
-      }
-
-      .doc-tarjeta {
-        padding: 25px 16px;
-        border-radius: 18px;
-      }
-
-      .doc-tarjeta h3 {
-        font-size: 1.4rem;
-      }
-
-      .doc-tarjeta h3::after {
-        width: 50px;
-        height: 3px;
-      }
-
-      .doc-tarjeta p {
-        font-size: 0.95rem;
-      }
-
-      .objetivos-especificos {
+      .objetivos-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 22px;
-      }
-
-      .objetivo-item {
-        padding: 14px;
-      }
-
-      .objetivo-item h4 {
-        font-size: 1rem;
-      }
-
-      .objetivo-item p {
-        font-size: 0.85rem;
       }
 
       .practicas-grid {
         grid-template-columns: 1fr;
-        gap: 18px;
-        margin-top: 25px;
-      }
-
-      .practica-btn .practica-img-wrap {
-        aspect-ratio: 1113 / 550;
-      }
-
-      .practica-btn .practica-info {
-        padding: 14px 14px 18px;
-      }
-
-      .practica-btn .practica-titulo {
-        font-size: 1rem;
-      }
-
-      .practica-btn .practica-sub {
-        font-size: 0.75rem;
-      }
-
-      .btn-volver {
-        font-size: 0.82rem;
-        padding: 10px 20px;
-        margin-bottom: 20px;
-      }
-
-      .detalle-practica h4 {
-        font-size: 1.3rem;
-      }
-
-      .detalle-practica .subtitulo {
-        font-size: 0.95rem;
-        margin-bottom: 22px;
-        padding-bottom: 16px;
-      }
-
-      .detalle-practica .titulo-seccion {
-        font-size: 1.05rem;
-        padding: 10px 14px;
-        margin-bottom: 16px;
-      }
-
-      .detalle-practica p {
-        font-size: 0.92rem;
-      }
-
-      .paso-bloque {
-        margin-bottom: 34px;
-      }
-
-      .practica-item {
-        padding: 16px;
-        border-radius: 14px;
-        margin-bottom: 22px;
-        gap: 12px;
-      }
-
-      .item-texto p {
-        font-size: 0.92rem;
-        line-height: 1.65;
-      }
-
-      .item-imagen figcaption {
-        font-size: 0.8rem;
-      }
-
-      .btn-inicio {
-        bottom: 16px;
-        right: 16px;
-        padding: 11px 20px;
-        font-size: 0.85rem;
-      }
-
-      .lightbox-cerrar {
-        top: 14px;
-        right: 14px;
-        width: 42px;
-        height: 42px;
-        font-size: 1.2rem;
-      }
-
-      .lightbox {
-        padding: 15px;
-      }
-    }
-
-    @media (max-width: 400px) {
-      h1 {
-        font-size: 1.55rem;
-      }
-
-      .tab-btn {
-        font-size: 0.75rem;
-        padding: 8px 12px;
-      }
-
-      .integrantes-wrap {
-        padding: 22px 14px;
-      }
-
-      .integrantes-header h3 {
-        font-size: 1.2rem;
-      }
-
-      .tarjeta .tarjeta-info {
-        padding: 16px 16px 20px;
-      }
-
-      .tarjeta .tarjeta-nombre {
-        font-size: 1rem;
-      }
-
-      .tarjeta .tarjeta-dato {
-        font-size: 0.8rem;
-      }
-
-      .tarjeta .tarjeta-numero {
-        width: 32px;
-        height: 32px;
-        font-size: 0.85rem;
-      }
-
-      .doc-tarjeta {
-        padding: 20px 12px;
-      }
-
-      .doc-tarjeta h3 {
-        font-size: 1.2rem;
-      }
-
-      .practica-btn .practica-titulo {
-        font-size: 0.95rem;
       }
 
       .btn-volver {
         font-size: 0.78rem;
-        padding: 9px 16px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1.5rem;
       }
 
-      .detalle-practica h4 {
-        font-size: 1.15rem;
+      .detalle-practica h2 {
+        font-size: 1.3rem;
       }
 
-      .detalle-practica .titulo-seccion {
-        font-size: 0.98rem;
+      .titulo-seccion {
+        font-size: 0.85rem;
+        padding: 0.45rem 0.8rem 0.45rem 0.6rem;
+      }
+
+      .practica-item {
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
       }
 
       .item-texto p {
         font-size: 0.88rem;
       }
+
+      .btn-inicio {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.78rem;
+      }
+
+      .lightbox-cerrar {
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+
+      .lightbox {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .header h1 {
+        font-size: 1.5rem;
+      }
+
+      .tab-btn {
+        font-size: 0.72rem;
+        padding: 0.5rem 0.7rem;
+      }
+
+      .card {
+        padding: 1.5rem 1rem;
+      }
+
+      .card h2 {
+        font-size: 1.15rem;
+      }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Producción Electrónica</h1>
+  <div class="container">
+    <header class="header">
+      <h1>Producción Electrónica</h1>
+      <p class="subtitle">Ciclo 2025 · Ibero Puebla</p>
+    </header>
 
-  <div class="tabs">
-    <button class="tab-btn activa" onclick="mostrarSeccion('introduccion', this)">Introducción</button>
-    <button class="tab-btn" onclick="mostrarSeccion('integrantes', this)">Integrantes</button>
-    <button class="tab-btn" onclick="mostrarSeccion('objetivos', this)">Objetivos</button>
-    <button class="tab-btn" onclick="mostrarSeccion('documentacion', this)">Documentación</button>
-  </div>
-
-  <div id="introduccion" class="seccion activa">
-    <div class="doc-tarjeta">
-      <h3>Introducción</h3>
-      <p>Esta página está hecha con el propósito de documentar los trabajos y prácticas de la materia de Producción Electrónica.</p>
+    <div class="tabs">
+      <button class="tab-btn activa" onclick="mostrarSeccion('introduccion', this)">Introducción</button>
+      <button class="tab-btn" onclick="mostrarSeccion('integrantes', this)">Integrantes</button>
+      <button class="tab-btn" onclick="mostrarSeccion('objetivos', this)">Objetivos</button>
+      <button class="tab-btn" onclick="mostrarSeccion('documentacion', this)">Documentación</button>
     </div>
-  </div>
 
-  <div id="integrantes" class="seccion">
-    <div class="integrantes-wrap">
-      <div class="integrantes-header">
-        <h3>Equipo de Trabajo</h3>
-        <p>Estudiantes de la materia de Producción Electrónica, encargados de documentar cada práctica, proceso y aprendizaje desarrollado a lo largo del curso.</p>
+    <!-- INTRODUCCIÓN -->
+    <div id="introduccion" class="seccion activa">
+      <div class="card">
+        <span class="section-label">Introducción</span>
+        <h2>Bienvenido al registro de prácticas</h2>
+        <p>Esta página está hecha con el propósito de documentar los trabajos y prácticas de la materia de Producción Electrónica.</p>
       </div>
+    </div>
 
-      <div class="integrantes-grid">
-        <div class="tarjeta">
-          <div class="tarjeta-foto">
-            <img src="Fotos_Integrantes/Alex.jpeg" alt="Alejandro Ruiz Corona">
-            <div class="tarjeta-numero">01</div>
-          </div>
-          <div class="tarjeta-info">
-            <p class="tarjeta-nombre">Alejandro Ruiz Corona</p>
-            <div class="tarjeta-datos">
-              <div class="tarjeta-dato">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- INTEGRANTES -->
+    <div id="integrantes" class="seccion">
+      <div class="card">
+        <span class="section-label">Equipo</span>
+        <h2>Integrantes</h2>
+        <p>Estudiantes de la materia de Producción Electrónica, encargados de documentar cada práctica, proceso y aprendizaje desarrollado a lo largo del curso.</p>
+
+        <div class="integrantes-grid">
+          <div class="integrante-card">
+            <div class="foto">
+              <img src="Fotos_Integrantes/Alex.jpeg" alt="Alejandro Ruiz Corona">
+            </div>
+            <div class="info">
+              <h4>Alejandro Ruiz Corona</h4>
+              <div class="dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="4" width="18" height="16" rx="2"/>
                   <path d="M7 9h10M7 13h6"/>
                 </svg>
                 <span>Matrícula: 203982</span>
               </div>
-              <div class="tarjeta-dato">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <div class="dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
                   <path d="M22 6l-10 7L2 6"/>
                 </svg>
@@ -1190,25 +900,22 @@
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="tarjeta">
-          <div class="tarjeta-foto">
-            <img src="Fotos_Integrantes/Cano.jpeg" alt="Jorge Fernando Cano Garcia">
-            <div class="tarjeta-numero">02</div>
-          </div>
-          <div class="tarjeta-info">
-            <p class="tarjeta-nombre">Jorge Fernando Cano Garcia</p>
-            <div class="tarjeta-datos">
-              <div class="tarjeta-dato">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="integrante-card">
+            <div class="foto">
+              <img src="Fotos_Integrantes/Cano.jpeg" alt="Jorge Fernando Cano Garcia">
+            </div>
+            <div class="info">
+              <h4>Jorge Fernando Cano Garcia</h4>
+              <div class="dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="4" width="18" height="16" rx="2"/>
                   <path d="M7 9h10M7 13h6"/>
                 </svg>
                 <span>Matrícula: 200763</span>
               </div>
-              <div class="tarjeta-dato">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <div class="dato">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
                   <path d="M22 6l-10 7L2 6"/>
                 </svg>
@@ -1217,344 +924,325 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="integrantes-footer">
-        <strong>Universidad Iberoamericana Puebla</strong><br>
-        Producción Electrónica · Ciclo 2025
-      </div>
-    </div>
-  </div>
-
-  <div id="objetivos" class="seccion">
-    <div class="doc-tarjeta">
-      <h3>Objetivos de la Materia</h3>
-      <p>Registrar y organizar el seguimiento de la producción electrónica realizada en clase y los conocimientos adquiridos, evidenciando nuestro avance académico y el cumplimiento de las metas de la materia.</p>
-
-      <h3 style="margin-top:40px;">Objetivos Específicos</h3>
-      <div class="objetivos-especificos">
-        <div class="objetivo-item">
-          <h4>Primer Objetivo</h4>
-          <p>Aprender a usar el editor de esquemas para la fabricación de placas.</p>
-          <img src="Fotos_Objetivos_Especificos/Esquematico.png" alt="Objetivo 1">
-        </div>
-        <div class="objetivo-item">
-          <h4>Segundo Objetivo</h4>
-          <p>Aprender a usar el editor de placas para enviar la placa a cortar.</p>
-          <img src="Fotos_Objetivos_Especificos/Placa.png" alt="Objetivo 2">
-        </div>
-        <div class="objetivo-item">
-          <h4>Tercer Objetivo</h4>
-          <p>Aprender a usar la página web Mods para modificar los archivos para la cortadora.</p>
-          <img src="Fotos_Objetivos_Especificos/Mods.png" alt="Objetivo 3">
-        </div>
-        <div class="objetivo-item">
-          <h4>Cuarto Objetivo</h4>
-          <p>Aprender a calibrar la cortadora de placas Roland para cortar la placa de cobre.</p>
-          <img src="Fotos_Objetivos_Especificos/Cortadora.jpg" alt="Objetivo 4">
+        <div class="footer-integrantes">
+          <strong>Universidad Iberoamericana Puebla</strong><br>
+          Producción Electrónica · Ciclo 2025
         </div>
       </div>
     </div>
-  </div>
 
-  <div id="documentacion" class="seccion">
-    <div class="doc-tarjeta">
+    <!-- OBJETIVOS -->
+    <div id="objetivos" class="seccion">
+      <div class="card">
+        <span class="section-label">Objetivos</span>
+        <h2>Objetivos de la Materia</h2>
+        <p style="margin-bottom:2.5rem;">Registrar y organizar el seguimiento de la producción electrónica realizada en clase y los conocimientos adquiridos, evidenciando nuestro avance académico y el cumplimiento de las metas de la materia.</p>
 
-      <div id="listaPracticas" class="lista-practicas">
-        <h3>Documentación</h3>
-        <p>Escoja una opcion.</p>
-        <div class="practicas-grid">
-          <button class="practica-btn" onclick="mostrarPractica('practica1')">
-            <div class="practica-img-wrap">
-              <img src="Fotos_Portadas/Kicad_Inicio.png" alt="KiCad">
-            </div>
-            <div class="practica-info">
-              <span class="practica-titulo">Instalación de KiCad</span>
-              <span class="practica-sub">Instalacion del programa</span>
-            </div>
-          </button>
-          <button class="practica-btn" onclick="mostrarPractica('practica2')">
-            <div class="practica-img-wrap">
-              <img src="Fotos_Portadas/Primera_placa.png" alt="Práctica 2">
-            </div>
-            <div class="practica-info">
-              <span class="practica-titulo">Fabricación de la primera placa</span>
-              <span class="practica-sub">Proceso completo</span>
-            </div>
-          </button>
-          <button class="practica-btn" onclick="mostrarPractica('practica3')">
-            <div class="practica-img-wrap">
-              <img src="Fotos_Portadas/MODS.png" alt="Mods">
-            </div>
-            <div class="practica-info">
-              <span class="practica-titulo">Uso de los Mods</span>
-              <span class="practica-sub">Preparación de archivos</span>
-            </div>
-          </button>
-          <button class="practica-btn" onclick="mostrarPractica('practica4')">
-            <div class="practica-img-wrap">
-              <img src="Fotos_Portadas/Cortadora.jpg" alt="Monofab">
-            </div>
-            <div class="practica-info">
-              <span class="practica-titulo">Monofab</span>
-              <span class="practica-sub">Máquina de corte</span>
-            </div>
-          </button>
+        <h3 style="margin-top:2rem;">Objetivos Específicos</h3>
+        <div class="objetivos-grid">
+          <div class="objetivo-item">
+            <h4>Primer Objetivo</h4>
+            <p>Aprender a usar el editor de esquemas para la fabricación de placas.</p>
+            <img src="Fotos_Objetivos_Especificos/Esquematico.png" alt="Objetivo 1">
+          </div>
+          <div class="objetivo-item">
+            <h4>Segundo Objetivo</h4>
+            <p>Aprender a usar el editor de placas para enviar la placa a cortar.</p>
+            <img src="Fotos_Objetivos_Especificos/Placa.png" alt="Objetivo 2">
+          </div>
+          <div class="objetivo-item">
+            <h4>Tercer Objetivo</h4>
+            <p>Aprender a usar la página web Mods para modificar los archivos para la cortadora.</p>
+            <img src="Fotos_Objetivos_Especificos/Mods.png" alt="Objetivo 3">
+          </div>
+          <div class="objetivo-item">
+            <h4>Cuarto Objetivo</h4>
+            <p>Aprender a calibrar la cortadora de placas Roland para cortar la placa de cobre.</p>
+            <img src="Fotos_Objetivos_Especificos/Cortadora.jpg" alt="Objetivo 4">
+          </div>
         </div>
       </div>
+    </div>
 
-      <div id="practica1" class="detalle-practica">
-        <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
-        <h4>Instalación de KiCad para la fabricacion de la PCB</h4>
-        <p class="subtitulo">Documentación de la instalación de KiCad.</p>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">1. Descargar el programa</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Se descargará el programa KiCad para la fabricación y el diseño de circuitos en la siguiente página web <a href="https://www.kicad.org/" target="_blank">KiCad</a>, En la página web encontrarás el botón de instalación.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica1_KiCad/Descargar_KiCad.png" alt="KiCad">
-              <figcaption>Página de descarga de KiCad</figcaption>
-            </figure>
-          </div>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Seleccione el sistema operativo de su preferencia y proceda a instalar KiCad.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica1_KiCad/Descargar_KiCad_2.png" alt="KiCad">
-              <figcaption>Selección del sistema operativo</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">2. Instalación de la librería FabLab</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez instalado el programa KiCad, se debe instalar la librería llamada FabLab. Para ello, debe entrar al administrador de elementos y contenido. Puede acceder de las dos formas que se indican en la siguiente imagen.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica1_KiCad/Descargar_FabLab.png" alt="FabLab">
-              <figcaption>Administrador de elementos y contenido</figcaption>
-            </figure>
-          </div>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez en el administrador de elementos y contenido, se instala la librería FabLab. Una vez finalizada la instalación, ya puede comenzar a fabricar.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica1_KiCad/Driver_FabLab.png" alt="FabLab">
-              <figcaption>Instalación de la librería FabLab</figcaption>
-            </figure>
+    <!-- DOCUMENTACIÓN -->
+    <div id="documentacion" class="seccion">
+      <div class="card">
+        <div id="listaPracticas" class="lista-practicas">
+          <span class="section-label">Documentación</span>
+          <h2>Prácticas del curso</h2>
+          <p style="margin-bottom:0.5rem;">Selecciona una práctica para ver el proceso completo.</p>
+          <div class="practicas-grid">
+            <button class="practica-btn" onclick="mostrarPractica('practica1')">
+              <div class="practica-img">
+                <img src="Fotos_Portadas/Kicad_Inicio.png" alt="KiCad">
+              </div>
+              <div class="practica-info">
+                <span class="practica-titulo">Instalación de KiCad</span>
+                <span class="practica-sub">Instalación del programa</span>
+              </div>
+            </button>
+            <button class="practica-btn" onclick="mostrarPractica('practica2')">
+              <div class="practica-img">
+                <img src="Fotos_Portadas/Primera_placa.png" alt="Práctica 2">
+              </div>
+              <div class="practica-info">
+                <span class="practica-titulo">Fabricación de la primera placa</span>
+                <span class="practica-sub">Proceso completo</span>
+              </div>
+            </button>
+            <button class="practica-btn" onclick="mostrarPractica('practica3')">
+              <div class="practica-img">
+                <img src="Fotos_Portadas/MODS.png" alt="Mods">
+              </div>
+              <div class="practica-info">
+                <span class="practica-titulo">Uso de los Mods</span>
+                <span class="practica-sub">Preparación de archivos</span>
+              </div>
+            </button>
+            <button class="practica-btn" onclick="mostrarPractica('practica4')">
+              <div class="practica-img">
+                <img src="Fotos_Portadas/Cortadora.jpg" alt="Monofab">
+              </div>
+              <div class="practica-info">
+                <span class="practica-titulo">Monofab</span>
+                <span class="practica-sub">Máquina de corte</span>
+              </div>
+            </button>
           </div>
         </div>
 
-      </div>
+        <!-- PRÁCTICA 1 -->
+        <div id="practica1" class="detalle-practica">
+          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <h2>Instalación de KiCad para la fabricación de la PCB</h2>
+          <p class="subtitulo">Documentación de la instalación de KiCad.</p>
 
-      <div id="practica2" class="detalle-practica">
-        <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
-        <h4>Fabricación de la primera placa</h4>
-        <p class="subtitulo">Documentación de fabricación.</p>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">1. Crear un nuevo proyecto</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Para crear un nuevo proyecto, se debe seleccionar el botón "Archivo", ubicado en la parte superior izquierda. Después, se debe seleccionar el botón "Nuevo Proyecto", como se muestra en la siguiente imagen.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">1. Descargar el programa</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Se descargará el programa KiCad para la fabricación y el diseño de circuitos en la siguiente página web <a href="https://www.kicad.org/" target="_blank">KiCad</a>. En la página web encontrarás el botón de instalación.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica1_KiCad/Descargar_KiCad.png" alt="KiCad">
+                <figcaption>Página de descarga de KiCad</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Nuevo_Proyecto.png" alt="Nuevo Proyecto">
-              <figcaption>Creación de un nuevo proyecto</figcaption>
-            </figure>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Seleccione el sistema operativo de su preferencia y proceda a instalar KiCad.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica1_KiCad/Descargar_KiCad_2.png" alt="KiCad">
+                <figcaption>Selección del sistema operativo</figcaption>
+              </figure>
+            </div>
           </div>
 
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez creado el nuevo proyecto, se debe seleccionar la opción predeterminada de KiCad, como se muestra en la imagen, para comenzar a trabajar en nuestro proyecto.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">2. Instalación de la librería FabLab</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez instalado el programa KiCad, se debe instalar la librería llamada FabLab. Para ello, debe entrar al administrador de elementos y contenido. Puede acceder de las dos formas que se indican en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica1_KiCad/Descargar_FabLab.png" alt="FabLab">
+                <figcaption>Administrador de elementos y contenido</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Plantilla_KiCad.png" alt="Plantilla_KiCad">
-              <figcaption>Selector KiCad</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">2. Abrir el editor de esquemas</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez que estés en tu nuevo proyecto, en la barra lateral izquierda aparecerán dos archivos nuevos: uno con extensión _pcb y otro con extensión _sch. Para comenzar a diseñar nuestra placa, debemos abrir el editor de esquemas, que corresponde al archivo _sch, o seleccionarlo directamente mediante el botón del editor de esquemas, como se muestra en la siguiente imagen.</p>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez en el administrador de elementos y contenido, se instala la librería FabLab. Una vez finalizada la instalación, ya puede comenzar a fabricar.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica1_KiCad/Driver_FabLab.png" alt="FabLab">
+                <figcaption>Instalación de la librería FabLab</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Abrir_Esquematico.png" alt="Abrir Esquematico">
-              <figcaption>Editor de esquemas</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">3. Agregar componentes al esquemático</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez dentro del esquemático, debemos agregar los componentes que necesitemos para la fabricación de la placa. Gracias a la librería FabLab, tenemos los componentes necesarios. Para buscar un componente, se puede presionar la tecla "A" o el botón indicado en la siguiente imagen.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Tecla_esquema.png" alt="Esquema">
-              <figcaption>Abrir componentes en esquemático</figcaption>
-            </figure>
-          </div>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez abierto el selector de componentes, podemos buscar los componentes que necesitemos mediante la barra de búsqueda ubicada en la parte superior izquierda. Es importante que los componentes que escojamos tengan una huella asignada, ya que, sin ella, no podrán utilizarse correctamente al cambiar al editor de placas. Un ejemplo de la huella se muestra en la siguiente imagen.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Huella.png" alt="R3">
-              <figcaption>Selector de componentes</figcaption>
-            </figure>
           </div>
         </div>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">4. Fabricación del circuito en esquemático</h5>
+        <!-- PRÁCTICA 2 -->
+        <div id="practica2" class="detalle-practica">
+          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <h2>Fabricación de la primera placa</h2>
+          <p class="subtitulo">Documentación de fabricación.</p>
 
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez que hayamos agregado todos los componentes necesarios, podemos proceder a elaborar el circuito en el esquemático. Tenemos dos maneras de unir los componentes: la primera es presionando la tecla "V" para dibujar cables, y la segunda es presionando el botón "Dibujar cables", como se muestra en la siguiente imagen.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">1. Crear un nuevo proyecto</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Para crear un nuevo proyecto, se debe seleccionar el botón "Archivo", ubicado en la parte superior izquierda. Después, se debe seleccionar el botón "Nuevo Proyecto", como se muestra en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Nuevo_Proyecto.png" alt="Nuevo Proyecto">
+                <figcaption>Creación de un nuevo proyecto</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Dibujar_cables.png" alt="Cables">
-              <figcaption>Botón Dibujar Cables</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">5. DRC (Design Rule Check)</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez que hayamos terminado de dibujar los cables, podemos ejecutar el DRC para verificar que el diseño cumpla con las reglas de diseño. El botón de DRC se encuentra en la barra de herramientas superior central, como se muestra en la imagen. En algunas versiones o configuraciones, esta herramienta puede aparecer como "ERC" si el programa está en español.</p>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez creado el nuevo proyecto, se debe seleccionar la opción predeterminada de KiCad, como se muestra en la imagen, para comenzar a trabajar en nuestro proyecto.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Plantilla_KiCad.png" alt="Plantilla_KiCad">
+                <figcaption>Selector KiCad</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/DRC.png" alt="DRC">
-              <figcaption>Botón DRC</figcaption>
-            </figure>
-          </div>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez abierto el DRC, debemos seleccionar el botón que dice "Run DRC" o "Ejecutar ERC". Se mostrarán los errores que tengamos en nuestro diseño. Si no hay errores, aparecerá un mensaje indicando que el diseño está correcto y podremos continuar con la fabricación de la placa.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Ejecutar_DRC.png" alt="Ejecutar DRC">
-              <figcaption>Botón Ejecutar DRC</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">6. Editor de placas</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Cuando nuestro diseño del esquemático esté listo, podemos pasar al editor de placas. Para ello, tenemos un botón llamado "Cambiar al editor de placas" en la barra de herramientas superior central; es el último botón de la derecha, como se muestra en la siguiente imagen.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Editor_de_Placas.png" alt="Cambio a Editor de Placas">
-              <figcaption>Cambio a Editor de Placas</figcaption>
-            </figure>
           </div>
 
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Para pasar nuestro circuito al editor de placas, debemos extraer la placa desde el esquemático. Para ello, utilizamos el botón "Extraer placa" o "Update Board" en la barra de herramientas superior central, como se indica en la siguiente imagen.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">2. Abrir el editor de esquemas</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez que estés en tu nuevo proyecto, en la barra lateral izquierda aparecerán dos archivos nuevos: uno con extensión _pcb y otro con extensión _sch. Para comenzar a diseñar nuestra placa, debemos abrir el editor de esquemas, que corresponde al archivo _sch, o seleccionarlo directamente mediante el botón del editor de esquemas, como se muestra en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Abrir_Esquematico.png" alt="Abrir Esquematico">
+                <figcaption>Editor de esquemas</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Extraer_placa.png" alt="Extraer placa">
-              <figcaption>Actualizar placa desde el esquemático</figcaption>
-            </figure>
           </div>
 
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez seleccionado el botón, aparecerá la siguiente ventana. Si la placa no presenta errores, podemos actualizarla desde el esquemático presionando el botón "Actualizar placa", como se muestra en la siguiente imagen.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">3. Agregar componentes al esquemático</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez dentro del esquemático, debemos agregar los componentes que necesitemos para la fabricación de la placa. Gracias a la librería FabLab, tenemos los componentes necesarios. Para buscar un componente, se puede presionar la tecla "A" o el botón indicado en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Tecla_esquema.png" alt="Esquema">
+                <figcaption>Abrir componentes en esquemático</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Ventana.png" alt="Descripción 2">
-              <figcaption>Ventana de actualización de placa</figcaption>
-            </figure>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez abierto el selector de componentes, podemos buscar los componentes que necesitemos mediante la barra de búsqueda ubicada en la parte superior izquierda. Es importante que los componentes que escojamos tengan una huella asignada, ya que, sin ella, no podrán utilizarse correctamente al cambiar al editor de placas. Un ejemplo de la huella se muestra en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Huella.png" alt="R3">
+                <figcaption>Selector de componentes</figcaption>
+              </figure>
+            </div>
           </div>
 
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">7. Distribución y ruteo de componentes en el editor de placas</h5>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez dentro del editor de placas, vamos a distribuir los componentes que agregamos en el esquemático dentro del área de trabajo. Se recomienda acomodarlos de manera ordenada para facilitar el ruteo de las pistas y evitar cruces innecesarios.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">4. Fabricación del circuito en esquemático</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez que hayamos agregado todos los componentes necesarios, podemos proceder a elaborar el circuito en el esquemático. Tenemos dos maneras de unir los componentes: la primera es presionando la tecla "V" para dibujar cables, y la segunda es presionando el botón "Dibujar cables", como se muestra en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Dibujar_cables.png" alt="Cables">
+                <figcaption>Botón Dibujar Cables</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Nuevo_Placa.png" alt="Distribucion de componentes">
-              <figcaption>Distribución de los componentes</figcaption>
-            </figure>
           </div>
 
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Posteriormente, se procede a rutear las pistas, uniendo cada componente según las conexiones definidas en el esquemático. Es importante revisar el ancho de las pistas y evitar cruces entre ellas para que el diseño quede funcional.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">5. DRC (Design Rule Check)</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez que hayamos terminado de dibujar los cables, podemos ejecutar el DRC para verificar que el diseño cumpla con las reglas de diseño. El botón de DRC se encuentra en la barra de herramientas superior central, como se muestra en la imagen. En algunas versiones o configuraciones, esta herramienta puede aparecer como "ERC" si el programa está en español.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/DRC.png" alt="DRC">
+                <figcaption>Botón DRC</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/ya_ruteado.png" alt="Ruteo de pistas">
-              <figcaption>Ruteo de las pistas en el editor de placas</figcaption>
-            </figure>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez abierto el DRC, debemos seleccionar el botón que dice "Run DRC" o "Ejecutar ERC". Se mostrarán los errores que tengamos en nuestro diseño. Si no hay errores, aparecerá un mensaje indicando que el diseño está correcto y podremos continuar con la fabricación de la placa.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Ejecutar_DRC.png" alt="Ejecutar DRC">
+                <figcaption>Botón Ejecutar DRC</figcaption>
+              </figure>
+            </div>
           </div>
 
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Para revisar o cambiar el ancho de las pistas, se puede modificar desde el botón indicado en la siguiente imagen, donde se define el grosor que tendrán las pistas al momento de fabricarlas.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">6. Editor de placas</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Cuando nuestro diseño del esquemático esté listo, podemos pasar al editor de placas. Para ello, tenemos un botón llamado "Cambiar al editor de placas" en la barra de herramientas superior central; es el último botón de la derecha, como se muestra en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Editor_de_Placas.png" alt="Cambio a Editor de Placas">
+                <figcaption>Cambio a Editor de Placas</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Ancho_pista.png" alt="Ancho de pistas">
-              <figcaption>Configuración del ancho de pistas</figcaption>
-            </figure>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Para pasar nuestro circuito al editor de placas, debemos extraer la placa desde el esquemático. Para ello, utilizamos el botón "Extraer placa" o "Update Board" en la barra de herramientas superior central, como se indica en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Extraer_placa.png" alt="Extraer placa">
+                <figcaption>Actualizar placa desde el esquemático</figcaption>
+              </figure>
+            </div>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez seleccionado el botón, aparecerá la siguiente ventana. Si la placa no presenta errores, podemos actualizarla desde el esquemático presionando el botón "Actualizar placa", como se muestra en la siguiente imagen.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Ventana.png" alt="Descripción 2">
+                <figcaption>Ventana de actualización de placa</figcaption>
+              </figure>
+            </div>
           </div>
-        </div>
 
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>En caso de que alguna pista no pueda ser ruteada directamente, se puede agregar una resistencia de 0 Ω para realizar un puente y completar la conexión.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">7. Distribución y ruteo de componentes en el editor de placas</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez dentro del editor de placas, vamos a distribuir los componentes que agregamos en el esquemático dentro del área de trabajo. Se recomienda acomodarlos de manera ordenada para facilitar el ruteo de las pistas y evitar cruces innecesarios.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Nuevo_Placa.png" alt="Distribucion de componentes">
+                <figcaption>Distribución de los componentes</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Puente.png" alt="Puente placa">
-              <figcaption>Lugar del puente</figcaption>
-            </figure>
-          </div>
-
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Se agrega la resistencia de 0 Ω en el editor de esquemas y luego se vuelve a actualizar la placa para completar las conexiones.</p>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Posteriormente, se procede a rutear las pistas, uniendo cada componente según las conexiones definidas en el esquemático. Es importante revisar el ancho de las pistas y evitar cruces entre ellas para que el diseño quede funcional.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/ya_ruteado.png" alt="Ruteo de pistas">
+                <figcaption>Ruteo de las pistas en el editor de placas</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica2_Placa/Folla_GaysFoto.png" alt="Puentes">
-              <figcaption>Puentes</figcaption>
-            </figure>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Para revisar o cambiar el ancho de las pistas, se puede modificar desde el botón indicado en la siguiente imagen, donde se define el grosor que tendrán las pistas al momento de fabricarlas.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Ancho_pista.png" alt="Ancho de pistas">
+                <figcaption>Configuración del ancho de pistas</figcaption>
+              </figure>
+            </div>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>En caso de que alguna pista no pueda ser ruteada directamente, se puede agregar una resistencia de 0 Ω para realizar un puente y completar la conexión.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Puente.png" alt="Puente placa">
+                <figcaption>Lugar del puente</figcaption>
+              </figure>
+            </div>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Se agrega la resistencia de 0 Ω en el editor de esquemas y luego se vuelve a actualizar la placa para completar las conexiones.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica2_Placa/Folla_GaysFoto.png" alt="Puentes">
+                <figcaption>Puentes</figcaption>
+              </figure>
+            </div>
           </div>
 
           <div class="paso-bloque">
             <h5 class="titulo-seccion">8. Contorno y finalización de la placa</h5>
-
             <div class="practica-item">
               <div class="item-texto">
                 <p>Una vez terminado el ruteo, se realiza una revisión general de la placa para comprobar que todos los componentes estén correctamente colocados y que las pistas sigan las conexiones establecidas en el esquemático. Después, se realiza el contorno en la capa "Edge.Cuts" y se procede con el corte perimetral, como se muestra en la imagen.</p>
@@ -1564,279 +1252,279 @@
                 <figcaption>Herramientas de corte</figcaption>
               </figure>
             </div>
-
           </div>
         </div>
 
-      <div id="practica3" class="detalle-practica">
-        <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
-        <h4>Mods</h4>
-        <p class="subtitulo">Documentación del uso de Mods.</p>
+        <!-- PRÁCTICA 3 -->
+        <div id="practica3" class="detalle-practica">
+          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <h2>Mods</h2>
+          <p class="subtitulo">Documentación del uso de Mods.</p>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">1. Entrar a la página de Mods</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Abrir el programa de Mods y hacer clic en la esquina superior izquierda, donde dice "Programs".</p>
-              <p>Después, bajar en la pestaña azul hasta "SRM-20 mill" y seleccionar la opción "mill 2D PCB".</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">1. Entrar a la página de Mods</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Abrir el programa de Mods y hacer clic en la esquina superior izquierda, donde dice "Programs".</p>
+                <p>Después, bajar en la pestaña azul hasta "SRM-20 mill" y seleccionar la opción "mill 2D PCB".</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/PROGRAMA.png" alt="PROGRAMA">
+                <figcaption>Selección del programa</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/PROGRAMA.png" alt="PROGRAMA">
-              <figcaption>Selección del programa</figcaption>
-            </figure>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">2. Seleccionar el archivo de las pistas</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Seleccionar el archivo SVG de las pistas, dando click a "select SVG file".</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/SVG Pistas.png" alt="Pistas">
+                <figcaption>Carga del archivo</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">3. Invertir las pistas</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Si las pistas están invertidas, hacer clic en la opción "invert".</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/INVERTIR.png" alt="INVERTIR">
+                <figcaption>Opción Invert</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">4. Seleccionar el cortador</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Seleccionar el cortador con el que se harán las pistas, en este caso seleccionaremos "1/64 flat".</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Cortador.png" alt="Cortador">
+                <figcaption>Tipo de cortador</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">5. Calcular las pistas</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Para saber cómo quedará nuestro corte, hacemos clic en la opción "calculate" y de esa manera sabremos como quedarían nuestras pistas y si tenemos que corregir o modificar algo.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Calcular pistas.png" alt="Calcular Pistas">
+                <figcaption>Cálculo de pistas</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">6. Configurar el origen</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Configurar el origen en el punto donde queremos que nuestra herramienta empiece al momento de cortar, en nuestro caso, los ejes X, Y y Z estarán en 0.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Origen0.png" alt="Origen0">
+                <figcaption>Configuración de origen</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">7. Guardar el archivo</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Guardar el archivo para el corte.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Guardar archivos.png" alt="Guardar">
+                <figcaption>Guardado del archivo</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">8. Seleccionar el archivo del trazado</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Seleccionar el archivo SVG del trazado.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/SVG Trazado.png" alt="SVG Trazado">
+                <figcaption>Carga del trazado</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">9. Invertir trazado</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Si es necesario, se puede invertir el trazado haciendo clic en "invert".</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Invertir trazo.png" alt="Invertir trazo">
+                <figcaption>Invertir trazado</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">10. Seleccionar el cortador del trazado</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Seleccionar el cortador que se utilizará para el trazado; en este caso, será "1/32 cutout".</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Cortador Trazado.png" alt="Cortador Trazado">
+                <figcaption>Cortador del trazado</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">11. Calcular el trazado</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Para saber cómo quedará nuestro trazado, hacemos clic en "calculate" para que nos muestre como quedaría y saber si necesitamos hacer correcciones o modificaciones.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Calcular trazado.png" alt="Calcular Trazado">
+                <figcaption>Cálculo del trazado</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">12. Configurar el origen</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Configurar el origen de la herramienta que vamos a utilizar para el trazado.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Origen trazado.png" alt="Origen Trazado">
+                <figcaption>Origen del trazado</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">13. Guardar el archivo</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Guardar el archivo del trazado una vez que todo esté configurado como queremos.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Guardar archivos.png" alt="Guardar archivos">
+                <figcaption>Guardado del trazado</figcaption>
+              </figure>
+            </div>
           </div>
         </div>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">2. Seleccionar el archivo de las pistas</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Seleccionar el archivo SVG de las pistas, dando click a "select SVG file".</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/SVG Pistas.png" alt="Pistas">
-              <figcaption>Carga del archivo</figcaption>
-            </figure>
-          </div>
-        </div>
+        <!-- PRÁCTICA 4 -->
+        <div id="practica4" class="detalle-practica">
+          <button class="btn-volver" onclick="volverALista()">← Volver a prácticas</button>
+          <h2>Monofab</h2>
+          <p class="subtitulo">Documentación del uso de la Monofab.</p>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">3. Invertir las pistas</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Si las pistas están invertidas, hacer clic en la opción "invert".</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">1. Preparar la MonoFab</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Encender la MonoFab, conectar el cable USB a la computadora y ejecutar el programa "MonoFab SRM-20".</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Vpanel.png" alt="Vpanel">
+                <figcaption>Preparación del archivo</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/INVERTIR.png" alt="INVERTIR">
-              <figcaption>Opción Invert</figcaption>
-            </figure>
           </div>
-        </div>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">4. Seleccionar el cortador</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Seleccionar el cortador con el que se harán las pistas, en este caso seleccionaremos "1/64 flat".</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">2. Configurar la MonoFab</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Para el primer corte haremos las perforaciones, por lo que tendremos que colocar una fresa de 0.8 mm.</p>
+                <p>Posteriormente, dirigimos los ejes X/Y al punto de origen deseado y los establecemos en 0.</p>
+                <p>Después, hacemos lo mismo con el eje Z.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Vpanel ejes.png" alt="Vpanel ejes">
+                <figcaption>Configuración de la máquina</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Cortador.png" alt="Cortador">
-              <figcaption>Tipo de cortador</figcaption>
-            </figure>
           </div>
-        </div>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">5. Calcular las pistas</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Para saber cómo quedará nuestro corte, hacemos clic en la opcion "calculate" y de esa manera sabremos como quedarian nuestras pistas y si tenemos que corregir o modificar algo.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">3. Ejecutar las perforaciones</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Después de establecer en 0 los ejes X, Y y Z, seleccionamos el archivo correspondiente para iniciar el corte. En este caso, se harán primero las perforaciones.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Monofab perfos.png" alt="Perfos">
+                <figcaption>Ejecución del corte</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Calcular pistas.png" alt="Calcular Pistas">
-              <figcaption>Cálculo de pistas</figcaption>
-            </figure>
           </div>
-        </div>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">6. Configurar el origen</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Configurar el origen en el punto donde queremos que nuestra herramienta empiece al momento de cortar, en nuestro caso, los ejes X, Y y Z estarán en 0.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">4. Ejecutar el corte de las pistas</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Luego de hacer las perforaciones, cambiamos la fresa a una de 0.4mm y regresamos al origen x/y, y repetimos el proceso con z, ya que al cambiar la fresa tenemos que volver a establecer en 0 este eje.</p>
+                <p>Después de hacer esto, seleccionamos el archivo de las pistas e iniciamos el corte.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Monofab pistas.png" alt="Pistas">
+                <figcaption>Ejecución del corte</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Origen0.png" alt="Origen0">
-              <figcaption>Configuración de origen</figcaption>
-            </figure>
           </div>
-        </div>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">7. Guardar el archivo</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Guardar el archivo para el corte.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">5. Ejecutar el corte perimetral</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Ahora cambiamos la fresa por una de 2.00 mm y repetimos el proceso para establecer nuevamente el eje Z. Finalmente, seleccionamos el archivo del perímetro e iniciamos el corte.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Monofab trazado.png" alt="Trazado">
+                <figcaption>Ejecución del corte</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Guardar archivos.png" alt="Guardar">
-              <figcaption>Guardado del archivo</figcaption>
-            </figure>
           </div>
-        </div>
 
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">8. Seleccionar el archivo del trazado</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Seleccionar el archivo SVG del trazado.</p>
+          <div class="paso-bloque">
+            <h5 class="titulo-seccion">6. Revisar los resultados</h5>
+            <div class="practica-item">
+              <div class="item-texto">
+                <p>Una vez que terminemos de cortar nuestra placa, revisamos que las perforaciones, las pistas y el trazado estén realizados correctamente. También verificamos que las pistas no estén invertidas.</p>
+              </div>
+              <figure class="item-imagen">
+                <img src="Fotos_Practica3_Mods/Resultado placa.png" alt="Placa">
+                <figcaption>Ejecución del corte</figcaption>
+              </figure>
             </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/SVG Trazado.png" alt="SVG Trazado">
-              <figcaption>Carga del trazado</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">9. Invertir trazado</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Si es necesario, se puede invertir el trazado haciendo clic en "invert".</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Invertir trazo.png" alt="Invertir trazo">
-              <figcaption>Invertir trazado</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">10. Seleccionar el cortador del trazado</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Seleccionar el cortador que se utilizará para el trazado; en este caso, será "1/32 cutout".</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Cortador Trazado.png" alt="Cortador Trazado">
-              <figcaption>Cortador del trazado</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">11. Calcular el trazado</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Para saber cómo quedará nuestro trazado, hacemos clic en "calculate" para que nos muestre como quedaria y saber si necesitamos hacer correcciones o modificaciones.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Calcular trazado.png" alt="Calcular Trazado">
-              <figcaption>Cálculo del trazado</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">12. Configurar el origen</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Configurar el origen de la herramienta que vamos a utilizar para el trazado.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Origen trazado.png" alt="Origen Trazado">
-              <figcaption>Origen del trazado</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">13. Guardar el archivo</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Guardar el archivo del trazado una vez que todo esté configurado como queremos.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Guardar archivos.png" alt="Guardar archivos">
-              <figcaption>Guardado del trazado</figcaption>
-            </figure>
           </div>
         </div>
 
       </div>
-
-      <div id="practica4" class="detalle-practica">
-        <button class="btn-volver" onclick="volverALista()">Volver a prácticas</button>
-        <h4>Monofab</h4>
-        <p class="subtitulo">Documentación del uso de la Monofab.</p>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">1. Preparar la MonoFab</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Encender la MonoFab, conectar el cable USB a la computadora y ejecutar el programa "MonoFab SRM-20".</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Vpanel.png" alt="Vpanel">
-              <figcaption>Preparación del archivo</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">2. Configurar la MonoFab</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Para el primer corte haremos las perforaciones, por lo que tendremos que colocar una fresa de 0.8 mm.</p>
-              <p>Posteriormente, dirigimos los ejes X/Y al punto de origen deseado y los establecemos en 0.</p>
-              <p>Después, hacemos lo mismo con el eje Z.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Vpanel ejes.png" alt="Vpanel ejes">
-              <figcaption>Configuración de la máquina</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">3. Ejecutar las perforaciones</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Después de establecer en 0 los ejes X, Y y Z, seleccionamos el archivo correspondiente para iniciar el corte. En este caso, se harán primero las perforaciones.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Monofab perfos.png" alt="Perfos">
-              <figcaption>Ejecución del corte</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">4. Ejecutar el corte de las pistas</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Luego de hacer las perforaciones, cambiamos la fresa a una de 0.4mm y regresamos al origen x/y, y repetimos el proceso con z, ya que al cambiar la fresa tenemos que volver a establecer en 0 este eje.</p>
-              <p>Después de hacer esto, seleccionamos el archivo de las pistas e iniciamos el corte.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Monofab pistas.png" alt="Pistas">
-              <figcaption>Ejecución del corte</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">5. Ejecutar el corte perimetral</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Ahora cambiamos la fresa por una de 2.00 mm y repetimos el proceso para establecer nuevamente el eje Z. Finalmente, seleccionamos el archivo del perímetro e iniciamos el corte.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Monofab trazado.png" alt="Trazado">
-              <figcaption>Ejecución del corte</figcaption>
-            </figure>
-          </div>
-        </div>
-
-        <div class="paso-bloque">
-          <h5 class="titulo-seccion">6. Revisar los resultados</h5>
-          <div class="practica-item">
-            <div class="item-texto">
-              <p>Una vez que terminemos de cortar nuestra placa, revisamos que las perforaciones, las pistas y el trazado estén realizados correctamente. También verificamos que las pistas no estén invertidas.</p>
-            </div>
-            <figure class="item-imagen">
-              <img src="Fotos_Practica3_Mods/Resultado placa.png" alt="Placa">
-              <figcaption>Ejecución del corte</figcaption>
-            </figure>
-          </div>
-        </div>
-
-      </div>
-
     </div>
   </div>
 
-  <button id="btnInicio" class="btn-inicio" onclick="irArriba()">Inicio</button>
+  <button id="btnInicio" class="btn-inicio" onclick="irArriba()">↑ Inicio</button>
 
   <div id="lightbox" class="lightbox" onclick="cerrarLightbox(event)">
     <button class="lightbox-cerrar" onclick="cerrarLightbox(event)" aria-label="Cerrar">×</button>
@@ -1852,14 +1540,14 @@
     }
 
     function mostrarPractica(id) {
-      document.getElementById('listaPracticas').classList.add('oculto');
+      document.getElementById('listaPracticas').style.display = 'none';
       document.querySelectorAll('.detalle-practica').forEach(d => d.classList.remove('activo'));
       document.getElementById(id).classList.add('activo');
     }
 
     function volverALista() {
       document.querySelectorAll('.detalle-practica').forEach(d => d.classList.remove('activo'));
-      document.getElementById('listaPracticas').classList.remove('oculto');
+      document.getElementById('listaPracticas').style.display = 'block';
     }
 
     function irArriba() {
@@ -1886,14 +1574,10 @@
     }
 
     function cerrarLightbox(event) {
-      if (event) {
-        event.stopPropagation();
-      }
+      if (event) event.stopPropagation();
       lightbox.classList.remove('activo');
       document.body.style.overflow = '';
-      setTimeout(() => {
-        lightboxImg.src = '';
-      }, 300);
+      setTimeout(() => { lightboxImg.src = ''; }, 300);
     }
 
     document.addEventListener('keydown', (e) => {
@@ -1903,9 +1587,7 @@
     });
 
     document.querySelectorAll('.item-imagen img').forEach(img => {
-      img.addEventListener('click', () => {
-        abrirLightbox(img.src, img.alt);
-      });
+      img.addEventListener('click', () => abrirLightbox(img.src, img.alt));
     });
   </script>
 </body>
