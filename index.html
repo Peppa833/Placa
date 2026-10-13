@@ -396,6 +396,12 @@
       margin-top: 1.25rem;
     }
 
+    /* Grid del segundo corte — máximo 4 columnas para que el botón no se estire gigante */
+    .practicas-grid.corte-2-grid {
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      max-width: 100%;
+    }
+
     .practica-btn {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.06);
@@ -1115,7 +1121,7 @@
             <span class="corte-linea"></span>
           </div>
 
-          <div class="practicas-grid">
+          <div class="practicas-grid corte-2-grid">
             <button class="practica-btn" onclick="mostrarPractica('practica5')">
               <span class="practica-badge corte-2">2º Corte</span>
               <div class="practica-img">
@@ -1842,16 +1848,16 @@
       const detalle = document.getElementById(id);
       detalle.classList.add('activo');
 
-      // Scroll al inicio del detalle de la práctica
+      // Scroll hasta arriba de todo
       requestAnimationFrame(() => {
-        const y = detalle.getBoundingClientRect().top + window.pageYOffset - 20;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
     function volverALista() {
       document.querySelectorAll('.detalle-practica').forEach(d => d.classList.remove('activo'));
       document.getElementById('listaPracticas').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function irArriba() {
